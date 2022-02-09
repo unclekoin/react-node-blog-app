@@ -6,8 +6,6 @@ const schema = new Schema({
   password: { type: String},
   admin: { type: Boolean },
   image: { type: String},
-  rate: { type: Number},
-  quantityArticles: { type: Number}
 }, {
   timestamps: true
 });
