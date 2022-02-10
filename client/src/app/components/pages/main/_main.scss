@@ -1,0 +1,22 @@
+.main {
+  height: auto;
+  padding: 6rem 5rem;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
+  &__header {
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &__line {
+    width: 100%;
+    height: 1px;
+    margin-bottom: 5rem;
+    background-color: $text-color;
+  }
+}

@@ -1,0 +1,21 @@
+.navbar {
+  border-right: 1px solid $text-color;
+  
+  &__nav {
+    height: 100%;
+    padding: 5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  .icon-logo {
+    font-size: 5rem;
+    color: $first-color;
+  }
+}
