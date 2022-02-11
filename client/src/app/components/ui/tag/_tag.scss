@@ -1,15 +1,15 @@
 .tag {
   padding: 0.5rem 1rem;
   text-align: center;
-  font-size: 1.4rem;
-  font-weight: 100;
+  font-size: $font-sm;
+  font-weight: 400;
   color: #FFFFFF;
   border-radius: 2rem;
-  background-color: $first-color-second;
+  background-color: $tag-color;
   transition: 0.3s;
 
   &:hover {
-    background-color: $first-color;
+    background-color: $text-color-light;
   }
 
   &:not(:last-child) {

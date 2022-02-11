@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import avatar from '../../../../assets/images/avatar.png';
 import image from '../../../../assets/images/image.jpg';
+import { article } from '../../../../temp/db/posts'
+import { getTimeToRead } from '../../../utils';
 
 const Card = () => {
   return (
@@ -30,7 +32,7 @@ const Card = () => {
           <div className="card__footer">
             <span>
               <span className="card__tag" role="button">Java Script</span>
-              <span className="card__how-long">10 минут на чтение</span>
+              <span className="card__how-long">{getTimeToRead(article)}</span>
             </span>
             <span role="button">
               <i className="bi bi-bookmark-plus card__mark"></i>

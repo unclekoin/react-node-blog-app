@@ -1,0 +1,34 @@
+.comments-modal {
+  width: 30%;
+  padding: 2rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -100%;
+  z-index: $z-modal;
+  background-color: $container-color;
+  box-shadow: -5px 0px 10px 2px rgba($first-color, 0.1);
+  transition: 0.3s;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  &-open {
+    right: 0;
+  }
+
+  &__close {
+    font-size: 3rem;
+  }
+
+  &__line {
+    width: 100%;
+    height: 1px;
+    margin-bottom: 5rem;
+    background-color: $line-color;
+  }
+}

@@ -9,14 +9,17 @@ import Selected from './components/pages/selected';
 import Wrapper from './layouts/wrapper';
 import Admin from './layouts/admin';
 import Edit from './components/pages/edit';
-import Login from './components/pages/login';
-import RequireAuth from './hoc/require-auth';
-import AuthProvider from './hoc/auth-provider';
+import Login from './layouts/login';
+import Overlay from './components/common/overlay/overlay';
+import CommentsModalProvider from './hoc/comments-modal-provider';
+import RegisterForm from './components/ui/register-form/register-form';
+import LoginForm from './components/ui/login-form/login-form';
 
 const App = () => {
   return (
     <>
-      <AuthProvider>
+      <CommentsModalProvider>
+        <Overlay />
         <Routes>
           <Route path="/" element={<Wrapper />}>
             <Route index element={<Main />} />
@@ -25,19 +28,15 @@ const App = () => {
             <Route path="selected" element={<Selected />} />
             <Route path="about" element={<About />} />
             <Route path="contacts" element={<Contacts />} />
-            <Route
-              path="/admin"
-              element={
-                <RequireAuth>
-                  <Admin />
-                </RequireAuth>
-              }
-            />
-            <Route path="login" element={<Login />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+          <Route path="login/" element={<Login />}>
+            <Route index element={ <LoginForm /> } />
+            <Route path='register' element={ <RegisterForm /> } />
+          </Route>
         </Routes>
-      </AuthProvider>
+      </CommentsModalProvider>
     </>
   );
 };

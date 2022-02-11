@@ -46,6 +46,8 @@ a {
 
 button {
   font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -55,16 +57,18 @@ img {
   width: 100%;
 }
 
-input {
+input,
+textarea {
   font-family: $body-font;
   color: $text-color-light;
   font-size: inherit;
   font-weight: 300;
 }
 
-input::-webkit-input-placeholder{
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder{
   font-family: $body-font;
-  font-size: 1.4rem;
+  font-size: $font-sm;
   font-weight: 300;
 }
 
@@ -103,6 +107,12 @@ ul {
   color: $first-color;
 }
 
-i.bi {
-  font-size: 2rem;
+.bi {
+  font-size: 2.3rem;
+  color: inherit;
+  transition: 0.2s;
+
+  &:hover {
+    color: $first-color
+  }
 }

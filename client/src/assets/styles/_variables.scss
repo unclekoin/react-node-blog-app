@@ -12,19 +12,10 @@ $first-color-lighter: hsl($hue-color, 92%, 85%);
 $title-color: hsl($hue-color, 8%, 15%);
 $text-color: hsl($hue-color, 8%, 45%);
 $text-color-light: hsl($hue-color, 8%, 50%);
+$tag-color: hsl($hue-color, 8%, 80%);
 $body-color: hsl($hue-color, 60%, 99%);
 $container-color: #ffffff;
-
-// Margin
-/* .25rem = 4px, .5rem = 8px, .75rem = 12px ... */
-$m-0-25: 0.25rem;
-$m-0-5: 0.5rem;
-$m-0-75: 0.75rem;
-$m-1: 1rem;
-$m-1-5: 1.5rem;
-$m-2: 2rem;
-$m-2-5: 2.5rem;
-$m-3: 3rem;
+$line-color: rgba($text-color, 0.3);
 
 // z index
 $z-tooltip: 10;
@@ -40,3 +31,6 @@ body.dark-theme {
   $body-color: hsl($hue-color, 28%, 12%);
   $container-color: hsl($hue-color, 29%, 16%);
 }
+
+// Font
+$font-sm: 1.4rem;

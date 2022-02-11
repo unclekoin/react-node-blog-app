@@ -1,4 +1,4 @@
-export const getLocalDate = () => {
+const getLocalDate = () => {
   return (
     new Date()
       .toLocaleString('ru', {
@@ -10,3 +10,5 @@ export const getLocalDate = () => {
       .slice(0, -1) + 'ода'
   );
 };
+
+export default getLocalDate;
