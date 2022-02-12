@@ -13,4 +13,9 @@
   &__item:not(:last-child) {
     margin-bottom: 3rem;
   }
+
+  &__login-image {
+    width: 4rem;
+    border-radius: 50%;
+  }
 }

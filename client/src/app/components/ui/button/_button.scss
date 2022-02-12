@@ -11,4 +11,9 @@
     background-color: $text-color-light;
     color: #FFFFFF;
   }
+
+  &:disabled {
+    color: $text-color-light;
+    background: transparent;
+  }
 }

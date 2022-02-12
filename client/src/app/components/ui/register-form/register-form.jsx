@@ -1,31 +1,65 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import InputGroup from '../input-group/input-group';
+import Button from '../button';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+  const goBack = () => navigate(-2);
+
+  const {
+    register,
+    formState: { errors, isValid },
+    reset,
+    handleSubmit,
+  } = useForm({
+    mode: 'onChange'
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
+  };
+
   return (
-    <form className="register-form">
-      <div className="input-group">
-        <label className="input-group__label" htmlFor="">
-          Имя
-        </label>
-        <input className="input-group__input" type="text" />
-        <span className="input-group__error"></span>
-      </div>
-      <div className="input-group">
-        <label className="input-group__label" htmlFor="">
-          Электронная почта
-        </label>
-        <input className="input-group__input" type="text" />
-        <span className="input-group__error"></span>
-      </div>
-      <div className="input-group">
-        <label className="input-group__label" htmlFor="">Пароль</label>
-        <input className="input-group__input" type="text" />
-        <span className="input-group__error"></span>
-      </div>
-      <div className="input-group">
-        <label className="input-group__label" htmlFor="">Фото</label>
-        <input className="input-group__input" type="text" />
-        <span className="input-group__error"></span>
+    <form onSubmit={handleSubmit(onSubmit)} className="register-form">
+      <InputGroup
+        id="name"
+        name="name"
+        errors={errors}
+        placeholder="Имя"
+        register={register}
+      />
+      <InputGroup
+        id="email"
+        name="email"
+        errors={errors}
+        placeholder="Электронная почта"
+        register={register}
+      />
+      <InputGroup
+        type="password"
+        id="password"
+        name="password"
+        errors={errors}
+        placeholder="Пароль"
+        register={register}
+      />
+      <InputGroup
+        type="file"
+        id="file"
+        name="file"
+        cls="file"
+        placeholder="Выбрать фото..."
+        register={register}
+      />
+      <Button fn={goBack} iaDisabled={!isValid}>Отправить</Button>
+      <div className="register-form__question">
+        Уже есть аккаунт?{' '}
+        <Link className="register-form__link" to="/login">
+          Войти
+        </Link>
       </div>
     </form>
   );

@@ -16,6 +16,8 @@ $tag-color: hsl($hue-color, 8%, 80%);
 $body-color: hsl($hue-color, 60%, 99%);
 $container-color: #ffffff;
 $line-color: rgba($text-color, 0.3);
+$input-color: hsl($hue-color, 90%, 95%);
+$danger-color: hsl(352, 90%, 58%);
 
 // z index
 $z-tooltip: 10;
@@ -33,4 +35,5 @@ body.dark-theme {
 }
 
 // Font
+$font-tiny: 1.2rem;
 $font-sm: 1.4rem;

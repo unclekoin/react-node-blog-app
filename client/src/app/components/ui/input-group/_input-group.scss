@@ -1,0 +1,49 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+
+  &__label {
+    margin-bottom: 0.5rem;
+    font-size: $font-tiny;
+
+    &-file {
+      width: 40rem;
+      padding: 1rem 2rem;
+      font-size: $font-sm;
+      font-weight: 300;
+      color: $text-color-light;
+      border: 1px solid $text-color-light;
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+
+      @include respond(tab-port) {
+        width: 30rem;
+      }
+    }
+  }
+
+  &__input {
+    width: 40rem;
+    padding: 1rem 2rem;
+    font-size: $font-sm;
+    border: 1px solid $text-color-light;
+    border-radius: 3px;
+    outline-color: $first-color;
+
+    @include respond(tab-port) {
+      width: 30rem;
+    }
+
+    &-danger {
+      outline-color: $danger-color;
+    }
+  }
+
+  &__error {
+    font-size: $font-tiny;
+    color: $danger-color;
+  }
+}

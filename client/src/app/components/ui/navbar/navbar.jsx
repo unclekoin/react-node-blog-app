@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../logo/logo';
+import avatar from '../../../../assets/images/avatar.png'
 
 const navbar = () => {
   return (
     <div className="navbar">
       <nav className="navbar__nav">
-       <Logo />
+        <Logo />
         <ul className="navbar__list">
           <li className="navbar__item">
             <NavLink to="/" className="navbar__link">
@@ -36,7 +37,7 @@ const navbar = () => {
         </ul>
         <div className="navbar__login">
           <Link to="/login" className="navbar__login-link">
-            <i className="bi bi-door-closed"></i>
+            <img className='navbar__login-image' src={avatar} alt="" />
           </Link>
         </div>
       </nav>

@@ -1,0 +1,28 @@
+.login {
+  max-width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 5rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+
+  &__close {
+    font-size: 3rem;
+  }
+
+  &__title {
+    margin-bottom: 5rem;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+}
