@@ -1,11 +1,18 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import Logo from '../logo/logo';
-import avatar from '../../../../assets/images/avatar.png'
+import NavbarLoginModal from './navbar-login-modal/navbar-login-modal';
+import avatar from '../../../../assets/images/avatar.png';
 
-const navbar = () => {
+const Navbar = () => {
+  const [navModalOpen, setNavModalOpen] = useState(false);
+  const toggleNavbarModal = () => {
+    setNavModalOpen((prevState) => !prevState);
+  };
+  
   return (
     <div className="navbar">
+      <NavbarLoginModal state={navModalOpen} />
       <nav className="navbar__nav">
         <Logo />
         <ul className="navbar__list">
@@ -36,13 +43,13 @@ const navbar = () => {
           </li>
         </ul>
         <div className="navbar__login">
-          <Link to="/login" className="navbar__login-link">
-            <img className='navbar__login-image' src={avatar} alt="" />
-          </Link>
+          <button onClick={toggleNavbarModal}>
+            <img className="navbar__login-image" src={avatar} alt="" />
+          </button>
         </div>
       </nav>
     </div>
   );
 };
 
-export default navbar;
+export default Navbar;

@@ -1,4 +1,5 @@
 .navbar {
+  position: relative;
   border-right: 1px solid $line-color;
   
   &__nav {
@@ -14,8 +15,62 @@
     margin-bottom: 3rem;
   }
 
-  &__login-image {
-    width: 4rem;
-    border-radius: 50%;
+  &__login {
+    &-image {
+      width: 4rem;
+      border-radius: 50%;
+    }
+  
+    &-modal {
+      display: none;
+      position: absolute;
+      left: 2rem;
+      bottom: 10rem;
+      z-index: $z-modal;
+      width: 20rem;
+      height: 10rem;
+      padding: 2rem;
+      border-radius: 3px;
+      background-color: #FFFFFF;
+      @include block-box-shadow;
+    }
+
+    &-modal--open {
+      display: block;
+    }
+  
+    &-triangle {
+      position: absolute;
+      bottom: -7px;
+      left: 5rem;
+      width: 20px;
+      height: 20px;
+      background-color: #FFFFFF;
+      transform: rotate(45deg);
+    }
+
+    &-line {
+      width: 100%;
+      margin: 0.5rem 0 1.5rem;
+      height: 1px;
+      background-color: $line-color;
+    }
+  
+    &-in,
+    &-out {
+      font-size: $font-sm;
+      font-weight: 400;
+      transition: 0.3s;
+    }
+
+    &-in:hover {
+      font-weight: 500;
+      color: $first-color;
+    }
+    &-out:hover {
+      color: $danger-color;
+    }
   }
+
+  
 }
