@@ -54,7 +54,7 @@ const RegisterForm = () => {
         placeholder="Выбрать фото..."
         register={register}
       />
-      <Button fn={goBack} iaDisabled={!isValid}>Отправить</Button>
+      <Button onClick={goBack} iaDisabled={!isValid}>Отправить</Button>
       <div className="register-form__question">
         Уже есть аккаунт?{' '}
         <Link className="register-form__link" to="/login">

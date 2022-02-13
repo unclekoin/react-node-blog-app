@@ -4,7 +4,9 @@
 @import './assets/styles/base';
 // @import "./styles/grid";
 @import './app/app';
+@import './app/layouts/create/create';
 @import './app/layouts/login/login';
+@import './app/components/ui/create-form/create-form';
 @import './app/components/ui/login-form/login-form';
 @import './app/components/pages/main/main';
 @import './app/components/pages/article/article';

@@ -1,0 +1,36 @@
+.create-form {
+  max-width: 850px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &__title-input {
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $title-color;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+  }
+
+  &__add-input {
+    margin-top: -7rem;
+    margin-left: -3rem;
+  }
+
+  &__input {
+    width: 100%;
+    min-height: 5rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    font-family: inherit;
+    outline: none;
+  }
+}

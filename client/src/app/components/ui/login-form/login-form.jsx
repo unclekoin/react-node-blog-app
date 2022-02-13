@@ -38,7 +38,7 @@ const LoginForm = () => {
         errors={errors}
         register={register}
       />
-      <Button fn={goBack} iaDisabled={!isValid}>Отправить</Button>
+      <Button onClick={goBack} isDisabled={!isValid}>Отправить</Button>
       <div className="login-form__question">
         Еще нет аккаунта?{' '}
         <Link className="login-form__link" to="/login/register">

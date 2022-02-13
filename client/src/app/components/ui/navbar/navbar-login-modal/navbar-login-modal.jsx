@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavbarLoginModal = ({ state }) => {
+const NavbarLoginModal = ({ state, onClick }) => {
   return (
     <div
       className={`navbar__login-modal${
@@ -13,7 +13,7 @@ const NavbarLoginModal = ({ state }) => {
         Войти
       </Link>
       <div className="navbar__login-line"></div>
-      <button className="navbar__login-out">Выйти из системы</button>
+      <button onClick={onClick} className="navbar__login-out">Выйти из системы</button>
     </div>
   );
 };

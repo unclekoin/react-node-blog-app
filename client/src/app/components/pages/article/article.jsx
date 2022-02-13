@@ -19,7 +19,7 @@ function Article() {
       <CommentsModal />
       <div className="article">
         <div className="article__button">
-          <Button fn={goBack}>Назад</Button>
+          <Button onClick={goBack}>Назад</Button>
         </div>
         <div className="article__line"></div>
         <div className="article__author-block">

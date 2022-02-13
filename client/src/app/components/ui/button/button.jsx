@@ -1,8 +1,12 @@
 import React from 'react';
 
-const Button = ({ children, fn = () => { }, iaDisabled = false }) => {
+const Button = ({ children, onClick = () => {}, isDisabled = false }) => {
   return (
-    <button onClick={fn} className="button" disabled={iaDisabled}>
+    <button
+      onClick={onClick}
+      className="button"
+      disabled={isDisabled}
+    >
       {children}
     </button>
   );

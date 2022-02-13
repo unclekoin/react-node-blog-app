@@ -5,14 +5,14 @@ import NavbarLoginModal from './navbar-login-modal/navbar-login-modal';
 import avatar from '../../../../assets/images/avatar.png';
 
 const Navbar = () => {
-  const [navModalOpen, setNavModalOpen] = useState(false);
+  const [isNavModalOpen, setNavModalOpen] = useState(false);
   const toggleNavbarModal = () => {
     setNavModalOpen((prevState) => !prevState);
   };
-  
+
   return (
     <div className="navbar">
-      <NavbarLoginModal state={navModalOpen} />
+      <NavbarLoginModal state={isNavModalOpen} onClick={toggleNavbarModal} />
       <nav className="navbar__nav">
         <Logo />
         <ul className="navbar__list">
@@ -37,7 +37,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="navbar__item">
-            <NavLink to="/admin" className="navbar__link">
+            <NavLink to="/create" className="navbar__link">
               <i className="bi bi-pen"></i>
             </NavLink>
           </li>
