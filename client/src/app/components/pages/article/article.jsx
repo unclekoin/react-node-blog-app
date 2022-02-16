@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import Button from '../../ui/button/button';
 import { useCommentsModal } from '../../../hooks/use-comments-modal';
 import CommentsModal from '../../common/comments/comments-modal/comments-modal';
+import ArticleContent from '../../ui/article-content/article-content';
 import { getTimeToRead } from '../../../utils';
 import { article } from '../../../../temp/db/posts';
 import avatar from '../../../../assets/images/avatar.png';
@@ -31,30 +32,7 @@ function Article() {
             </span>
           </div>
         </div>
-        <h1 className="article__title">
-          Самый лучший фреймворк всех времен и народов в мире
-        </h1>
-        <div className="article__content">
-          {article.map((paragraph, i) => {
-            const key = article.length - i;
-            if (paragraph.slice(0, 4) === 'http') {
-              return (
-                <img
-                  className="article__image"
-                  key={key}
-                  src={paragraph}
-                  alt=""
-                />
-              );
-            } else {
-              return (
-                <p className="article__text" key={key}>
-                  {paragraph}
-                </p>
-              );
-            }
-          })}
-        </div>
+        <ArticleContent />
         <ul className="article__action-list">
           {/* Здесь должна быть логика показа кнопки только администратору */}
           <li className="article__action-item">

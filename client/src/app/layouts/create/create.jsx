@@ -4,14 +4,13 @@ import Logo from '../../components/ui/logo';
 import avatar from '../../../assets/images/avatar.png';
 
 const Create = () => {
-  const [sections, setSections] = useState([]);
-  const [data, setData] = useState([]);
-  const [title, setTitle] = useState('');
+  const [typeFieldList, setTypesFieldList] = useState([]);
+  const [data, setData] = useState({ title: '' });
 
   const submitData = () => {
     console.log(data);
-    setSections([]);
-    setTitle('');
+    setData({title: ''});
+    setTypesFieldList([]);
   };
   return (
     <div className="create">
@@ -27,9 +26,7 @@ const Create = () => {
         </div>
       </div>
       <div className="create__container">
-        <Outlet
-          context={[data, setData, sections, setSections, title, setTitle]}
-        />
+        <Outlet context={[typeFieldList, setTypesFieldList, data, setData]} />
       </div>
     </div>
   );

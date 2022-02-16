@@ -1,44 +1,67 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 import TypesMenu from './types-menu/types-menu';
 import CreateFormInputGroup from './create-form-input-group/create-form-input-group';
 
 const CreateForm = () => {
   const [isTypeMenuOpen, setTypeMenuOpen] = useState(false);
-  const [typesList, setTypesList] = useState([]);
-  const [data, setData, sections, setSections, title, setTitle] =
-    useOutletContext();
+  const [count, setCount] = useState(1);
+  const [typeFieldList, setTypesFieldList, data, setData] = useOutletContext();
 
-  const onTitleChange = (e) => {
-    setTitle(e.target.value);
+  const handleTitleChange = ({ target }) => {
+    setData((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
   };
 
   const toggleTypesMenu = () => {
     setTypeMenuOpen((prevState) => !prevState);
   };
 
-  const addInput = (type) => {
-    setTypesList((prevState) => [...prevState, type]);
+  const addInput = (typeField) => {
+    if (typeField === 'divider') {
+      setData((prevState) => ({
+        ...prevState,
+        [`${typeField}zzz${count}`]: true,
+      }));
+
+      setCount((prevState) => prevState + 1);
+    }
+    setTypesFieldList((prevState) => [...prevState, typeField]);
     setTypeMenuOpen((prevState) => !prevState);
-    console.log(type);
+  };
+
+  const handleInputChange = ({ target }) => {
+    setData((prevState) => ({
+      ...prevState,
+      [target.name]: target.value,
+    }));
   };
 
   return (
     <div className="create-form">
       <input
-        onChange={onTitleChange}
-        autoFocus
-        value={title}
+        onChange={handleTitleChange}
+        name="title"
+        value={data.title}
         className="create-form__title-input"
         type="text"
         placeholder="Введите заголовок..."
       />
-      {typesList.length
-        ? typesList.map((type, index) => (
-            <CreateFormInputGroup key={nanoid()} type={type} />
-          ))
-        : null}
+      <div className="create-form__container">
+        {typeFieldList.length
+          ? typeFieldList.map((typeField, index) => (
+              <CreateFormInputGroup
+                key={`${typeField}-${index + 1}`}
+                onChange={handleInputChange}
+                value={data[`${typeField}zzz${index + 1}`] || ''}
+                name={`${typeField}zzz${index + 1}`}
+                typeField={typeField}
+              />
+            ))
+          : null}
+      </div>
       <div className="create-form__buttons">
         <TypesMenu isOpen={isTypeMenuOpen} addInput={addInput} />
         <i

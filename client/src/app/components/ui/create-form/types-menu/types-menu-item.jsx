@@ -1,15 +1,17 @@
 import React from 'react';
+import { getInputTypesList } from '../../../../utils';
 
 const TypesMenuItem = ({ type, addInput }) => {
+  const typeList = getInputTypesList();
   const getToolTip = () => {
     switch (type) {
-      case 'text-paragraph':
+      case 'text':
         return 'Текст';
-      case 'camera':
+      case 'img':
         return 'Ссылка';
-      case 'type-h3':
+      case 'h3':
         return 'Подзаголовок';
-      case 'hr':
+      case 'divider':
         return 'Линия';
       default:
         return;
@@ -19,7 +21,7 @@ const TypesMenuItem = ({ type, addInput }) => {
     <li className="types-menu__item">
       <i
         onClick={() => addInput(type)}
-        className={`bi bi-${type} types-menu__icon`}
+        className={`bi bi-${typeList[type]} types-menu__icon`}
         data-tooltip={getToolTip()}
         role="button"
       ></i>
