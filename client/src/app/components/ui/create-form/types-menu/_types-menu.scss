@@ -1,0 +1,52 @@
+.types-menu {
+  position: absolute;
+  display: none;
+  padding: 1rem 2.5rem;
+  background-color: #ffffff;
+  top: 2rem;
+  right: -22rem;
+  z-index: $z-tooltip;
+  @include block-box-shadow;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: 0.3s linear;
+
+  &--hidden {
+    display: block;
+  }
+
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+    & [data-tooltip] {
+      position: relative;
+    }
+    & [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 0.5rem 1.5rem;
+      font-size: $font-tiny;
+      font-style: normal;
+      color: #FFFFFF;
+      background-color: $tag-color;
+      border-radius: 2rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: 0.5s;
+    }
+
+    & [data-tooltip]:hover::after {
+      opacity: 1;
+      top: -2.5rem;
+     }
+  }
+
+  &__item:not(:last-child) {
+    margin-right: 2.5rem;
+  }
+}

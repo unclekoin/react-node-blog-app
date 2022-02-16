@@ -6,13 +6,18 @@
   align-items: flex-start;
 
   &__title-input {
+    width: 100%;
     margin-bottom: 2rem;
-    padding-left: 2rem;
+    padding: 1rem 2rem;
     font-size: 2.5rem;
-    font-weight: 700;
     color: $title-color;
     border: none;
+    border-radius: 0.5rem;
     outline: none;
+     
+    &:focus {
+      background-color: rgba($first-color, 0.1);
+    }
 
     &::placeholder {
       font-size: inherit;
@@ -20,17 +25,11 @@
     }
   }
 
-  &__add-input {
-    margin-top: -7rem;
-    margin-left: -3rem;
+  &__buttons {
+    position: relative;
   }
 
-  &__input {
-    width: 100%;
-    min-height: 5rem;
-    margin-bottom: 1rem;
-    padding-left: 2rem;
-    font-family: inherit;
-    outline: none;
+  &__add-input {
+    font-size: 2.5rem;
   }
 }

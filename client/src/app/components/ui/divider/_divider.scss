@@ -1,0 +1,9 @@
+.divider {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 500;
+
+  & span:not(:last-child) {
+    margin-right: 3rem;
+  }
+}
