@@ -6,7 +6,8 @@ import CreateFormInputGroup from './create-form-input-group/create-form-input-gr
 const CreateForm = () => {
   const [isTypeMenuOpen, setTypeMenuOpen] = useState(false);
   const [count, setCount] = useState(1);
-  const [typeFieldList, setTypesFieldList, data, setData] = useOutletContext();
+  const [typeFieldList, setTypesFieldList, data, setData] =
+    useOutletContext();
 
   const handleTitleChange = ({ target }) => {
     setData((prevState) => ({
@@ -23,7 +24,7 @@ const CreateForm = () => {
     if (typeField === 'divider') {
       setData((prevState) => ({
         ...prevState,
-        [`${typeField}zzz${count}`]: true,
+        [`${typeField}zzz${count}`]: 'divider',
       }));
 
       setCount((prevState) => prevState + 1);
@@ -72,6 +73,7 @@ const CreateForm = () => {
           role="button"
         ></i>
       </div>
+      <button className='create-form__reset'>Очистить форму</button>
     </div>
   );
 };

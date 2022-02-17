@@ -1,4 +1,5 @@
-const getTimeToRead = (array) => {
+const getTimeToRead = (obj) => {
+  const array = Object.values(obj);
   const minutes = Math.ceil(
     array
       .map((string) => {

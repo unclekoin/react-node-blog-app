@@ -15,6 +15,8 @@ import CommentsModalProvider from './hoc/comments-modal-provider';
 import RegisterForm from './components/ui/register-form/register-form';
 import LoginForm from './components/ui/login-form/login-form';
 import CreateForm from './components/ui/create-form/create-form';
+import Preview from './layouts/preview/preview';
+import ArticleContent from './components/ui/article-content/article-content';
 
 const App = () => {
   return (
@@ -24,8 +26,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Wrapper />}>
             <Route index element={<Main />} />
-            <Route path=":articleId" element={<Article />} />
-            <Route path=":articleId/edit" element={<Edit />} />
+            <Route path="article/:articleId" element={<Article />} />
+            <Route path="article:articleId/edit" element={<Edit />} />
             <Route path="selected" element={<Selected />} />
             <Route path="about" element={<About />} />
             <Route path="contacts" element={<Contacts />} />
@@ -36,7 +38,10 @@ const App = () => {
             <Route path="register" element={<RegisterForm />} />
           </Route>
           <Route path="create/" element={<Create />}>
-            <Route index element={ <CreateForm />} />
+            <Route index element={<CreateForm />} />
+          </Route>
+          <Route path="preview/" element={<Preview />}>
+            <Route index element={<ArticleContent />} />
           </Route>
         </Routes>
       </CommentsModalProvider>

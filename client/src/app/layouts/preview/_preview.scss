@@ -1,0 +1,42 @@
+.preview {
+  max-width: 850px;
+  margin: 0 auto;
+
+  &__wrapper {
+    position: relative;
+    min-height: 100vh;
+    padding: 10rem 5rem;
+    border-left: 1px solid $line-color;
+    border-right: 1px solid $line-color;
+
+    @include respond(tab-land) {
+      padding: 10rem 2rem;
+    }
+  }
+
+  &__button {
+    position: fixed;
+    top: 5rem;
+    left: 5rem;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: $line-color;
+    border-radius: 50%;
+    border: 2px solid $line-color;
+    transition: 0.3s;
+
+    @include respond(tab-land) {
+      top: 3rem;
+      left: 3rem;
+    }
+
+    &:hover {
+      border-color: $first-color;
+      color: $first-color;
+    }
+  }
+}

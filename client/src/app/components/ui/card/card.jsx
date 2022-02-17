@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import avatar from '../../../../assets/images/avatar.png';
-import image from '../../../../assets/images/image.jpg';
 import { article } from '../../../../temp/db/posts'
 import { getTimeToRead } from '../../../utils';
 
@@ -15,7 +14,7 @@ const Card = () => {
       </div>
       <div className="card__wrapper">
         <div className="card__container">
-          <Link to="/123456789">
+          <Link to="/article/123456789">
             <div className="card__content">
               <h4 className="card__title">
                 Самый лучший фреймворк всех времен и народов в мире
@@ -39,7 +38,7 @@ const Card = () => {
             </span>
           </div>
         </div>
-        <img src={image} alt="code" className="card__image" />
+        <img src="https://images.unsplash.com/photo-1571844307880-751c6d86f3f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1848&q=80" alt="code" className="card__image" />
       </div>
     </div>
   );

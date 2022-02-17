@@ -13,9 +13,9 @@
 @import './app/components/ui/article-content/article-content';
 @import './app/components/ui/sidebar/sidebar';
 @import './app/components/ui/navbar/navbar';
-@import './app//components/ui/card/card';
-@import './app//components/ui/tag/tag';
-@import './app//components/ui/button/button';
+@import './app/components/ui/card/card';
+@import './app/components/ui/tag/tag';
+@import './app/components/ui/button/button';
 @import './app/components/common/comments/comments-modal/comments-modal';
 @import './app/components/common/overlay/overlay';
 @import './app/components/common/comments/comments-form/comments-form';
@@ -25,4 +25,6 @@
 @import './app/components/ui/logo/logo';
 @import './app/components/ui/create-form/types-menu/types-menu';
 @import './app/components/ui/create-form/create-form-input-group/create-form-input-group';
-@import './app//components/ui/divider/divider';
+@import './app/components/ui/divider/divider';
+@import './app/layouts/preview/preview';
+@import './app/components/ui/create-form/reset-modal/reset-modal';
