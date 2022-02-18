@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation, useParams } from 'react-router-dom';
 import Logo from '../../components/ui/logo';
 import AvatarFrame from '../../components/ui/avatar-frame';
 import avatar from '../../../assets/images/avatar.png';
 
 const Create = () => {
-  const [typeFieldList, setTypesFieldList] = useState([]);
-  const [data, setData] = useState({ title: '' });
+  const [data, setData] = useState([
+    { _id: 'title-h1', type: 'title', content: '' },
+  ]);
   const navigate = useNavigate();
+  const { articleId } = useParams();
   const { state } = useLocation();
 
-  useEffect(() => {
-    if (localStorage.getItem('preview')) {
-      const savedData = JSON.parse(localStorage.getItem('preview'));
-      Object.keys(savedData)
-        .slice(1)
-        .forEach((key) => {
-          const [type] = key.split('zzz');
-          setTypesFieldList((prevState) => [...prevState, type]);
-        });
-      setData(savedData);
-    }
-  }, [state]);
+  // useEffect(() => {
+  //   if (localStorage.getItem('preview')) {
+  //     const savedData = JSON.parse(localStorage.getItem('preview'));
+  //     Object.keys(savedData)
+  //       .slice(1)
+  //       .forEach((key) => {
+  //         const [type] = key.split('zzz');
+  //         setTypesFieldList((prevState) => [...prevState, type]);
+  //       });
+  //     setData(savedData);
+  //   }
+
+  //   if (articleId) {
+  //     Object.keys(article)
+  //       .slice(1)
+  //       .forEach((key) => {
+  //         const [type] = key.split('zzz');
+  //         setTypesFieldList((prevState) => [...prevState, type]);
+  //       });
+  //       setData(article);
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const isDisabled = Object.keys(data).length <= 2 && !data.title;
 
   const submitData = () => {
     console.log(data);
     setData({ title: '' });
-    setTypesFieldList([]);
     localStorage.removeItem('preview');
   };
 
@@ -46,6 +58,12 @@ const Create = () => {
     localStorage.preview = JSON.stringify(data);
     navigate('/preview');
   };
+
+  const removeElement = (elementId) => {
+    console.log(elementId);
+  };
+
+  console.log(data);
 
   return (
     <div className="create">
@@ -79,12 +97,11 @@ const Create = () => {
       <div className="create__container">
         <Outlet
           context={[
-            typeFieldList,
-            setTypesFieldList,
             data,
             setData,
             handlePreview,
             isDisabled,
+            removeElement,
             state,
           ]}
         />

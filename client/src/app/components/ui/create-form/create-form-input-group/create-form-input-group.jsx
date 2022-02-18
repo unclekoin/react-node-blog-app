@@ -2,7 +2,7 @@ import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import Divider from '../../divider/divider';
 
-const CreateFormInputGroup = ({ typeField, value, name, onChange }) => {
+const CreateFormInputGroup = ({ typeField, value, name, onChange, removeElement }) => {
   return (
     <div className="create-form-input-group">
       {typeField === 'text' ? (
@@ -23,6 +23,9 @@ const CreateFormInputGroup = ({ typeField, value, name, onChange }) => {
           placeholder={getPlaceholderText(typeField)}
         />
       )}
+      <button onClick={() => removeElement(name)} className="create-form-input-group__delete-button">
+      <i className="bi bi-x" />
+      </button>
     </div>
   );
 };

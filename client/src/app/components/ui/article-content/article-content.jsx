@@ -1,53 +1,58 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { article } from '../../../../temp/db/posts';
 import Divider from '../divider/divider';
 
-const ArticleContent = () => {
+const ArticleContent = ({ title, content }) => {
   const location = useLocation();
-
   const data = location.pathname.includes('/preview')
     ? JSON.parse(localStorage.getItem('preview'))
-    : article;
+    : content;
+
+
 
   return (
     <div className="article-content">
-      <h1 className="article-content__title">{data.title}</h1>
-      {Object.keys(data).map((key) => {
-        const [type, index] = key.split('zzz');
-
-        if (type === 'text' && index === '1') {
-          return (
-            <p key={key} className="article-content__snippet">
-              {data[key]}
-            </p>
-          );
-        }
-
-        switch (type) {
-          case 'text':
+      <h1 className="article-content__title">{title}</h1>
+      {data.map((item) => {
+        switch (item.type) {
+          case 'snippet':
             return (
-              <p key={key} className="article-content__text">
-                {data[key]}
+              <p key={item._id} className="article-content__snippet">
+                {item.content}
               </p>
             );
-          case 'h3':
+          case 'text':
             return (
-              <h3 key={key} className="article-content__subtitle">
-                {data[key]}
+              <p key={item._id} className="article-content__text">
+                {item.content}
+              </p>
+            );
+          case 'subtitle':
+            return (
+              <h3 key={item._id} className="article-content__subtitle">
+                {item.content}
               </h3>
             );
-          case 'img':
+          case 'image':
             return (
               <img
-                key={key}
+                key={item._id}
                 className="article-content__image"
-                src={data[key]}
+                src={item.content}
                 alt=""
               />
             );
           case 'divider':
-            return <Divider key={key} />;
+            return <Divider key={item._id} />;
+          case 'conclusion':
+            return (
+              <div key={item._id}>
+                <h3 className="article-content__subtitle">Заключение:</h3>
+                <p className="article-content__snippet">
+                  {item.content}
+                </p>
+              </div>
+            );
           default:
             return null;
         }

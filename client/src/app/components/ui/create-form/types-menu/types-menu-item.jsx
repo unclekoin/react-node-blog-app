@@ -7,12 +7,16 @@ const TypesMenuItem = ({ type, addInput }) => {
     switch (type) {
       case 'text':
         return 'Текст';
-      case 'img':
+      case 'image':
         return 'Ссылка';
-      case 'h3':
+      case 'subtitle':
         return 'Подзаголовок';
       case 'divider':
         return 'Линия';
+        case 'snippet':
+        return 'Сниппет';
+        case 'conclusion':
+          return 'Заключение';
       default:
         return;
     }

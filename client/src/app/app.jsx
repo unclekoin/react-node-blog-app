@@ -8,7 +8,6 @@ import NotFound from './components/pages/not-found';
 import Selected from './components/pages/selected';
 import Wrapper from './layouts/wrapper';
 import Create from './layouts/create';
-import Edit from './components/pages/edit';
 import Login from './layouts/login';
 import Overlay from './components/common/overlay/overlay';
 import ModalProvider from './hoc/modal-provider';

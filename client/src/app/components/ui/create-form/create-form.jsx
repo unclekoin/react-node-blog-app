@@ -4,18 +4,18 @@ import { useModal } from '../../../hooks/use-modal';
 import TypesMenu from './types-menu/types-menu';
 import CreateFormInputGroup from './create-form-input-group/create-form-input-group';
 import ResetModal from './reset-modal/reset-modal';
+import { nanoid } from 'nanoid';
 
 const CreateForm = () => {
   const { toggleWindow } = useModal();
   const [isTypeMenuOpen, setTypeMenuOpen] = useState(false);
   const [count, setCount] = useState(1);
   const [
-    typeFieldList,
-    setTypesFieldList,
     data,
     setData,
     handlePreview,
     isDisabled,
+    removeElement,
   ] = useOutletContext();
 
   const handleTitleChange = ({ target }) => {
@@ -29,18 +29,11 @@ const CreateForm = () => {
     setTypeMenuOpen((prevState) => !prevState);
   };
 
-  const addInput = (typeField) => {
-    if (typeField === 'divider') {
-      setData((prevState) => ({
-        ...prevState,
-        [`${typeField}zzz${count}`]: 'divider',
-      }));
-
-      setCount((prevState) => prevState + 1);
-    }
-    setTypesFieldList((prevState) => [...prevState, typeField]);
-    setTypeMenuOpen((prevState) => !prevState);
+  const addInput = (type) => {
+    setData((prevState) => [...prevState, { _id: nanoid(), type, content: '' }]);
   };
+
+  console.log(data);
 
   const handleInputChange = ({ target }) => {
     setData((prevState) => ({
@@ -51,7 +44,6 @@ const CreateForm = () => {
 
   const cleanForm = () => {
     setData({ title: '' });
-    setTypesFieldList([]);
     if (localStorage.preview) localStorage.removeItem('preview');
     toggleWindow();
   };
@@ -69,14 +61,15 @@ const CreateForm = () => {
           placeholder="Введите заголовок..."
         />
         <div className="create-form__container">
-          {typeFieldList.length
-            ? typeFieldList.map((typeField, index) => (
+          {data.length
+            ? data.map((typeField, index) => (
                 <CreateFormInputGroup
                   key={`${typeField}-${index + 1}`}
                   onChange={handleInputChange}
                   value={data[`${typeField}zzz${index + 1}`] || ''}
                   name={`${typeField}zzz${index + 1}`}
                   typeField={typeField}
+                  removeElement={removeElement}
                 />
               ))
             : null}

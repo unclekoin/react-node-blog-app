@@ -1,5 +1,12 @@
 const getInputTypesList = () => {
-  return { text: 'text-paragraph', img: 'camera', h3: 'type-h3', divider: 'hr'};
+  return {
+    text: 'justify',
+    image: 'camera',
+    subtitle: 'type-h3',
+    divider: 'hr',
+    snippet: 'blockquote-left',
+    conclusion: 'blockquote-right',
+  };
 };
 
 export default getInputTypesList;

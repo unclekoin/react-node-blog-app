@@ -1,9 +1,9 @@
-const getTimeToRead = (obj) => {
-  const array = Object.values(obj);
+const getTimeToRead = (data) => {
+  const array = data.map((item) => item.content);
   const minutes = Math.ceil(
     array
-      .map((string) => {
-        return string.split(' ').length;
+      .map((item) => {
+        return item.split(' ').length;
       })
       .reduce((sum, num) => sum + num, 0) / 150
   );

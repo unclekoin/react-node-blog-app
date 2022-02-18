@@ -10,14 +10,19 @@
     font-weight: 300;
     color: $text-color-light;
 
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
     &-avatar {
-      width: 3rem;
+      width: 3.5rem;
       margin-right: 1rem;
       border-radius: 50%;
     }
 
     &-author {
-      margin-right: 1rem;
+      margin-bottom: 0.3rem;
     }
   }
 
