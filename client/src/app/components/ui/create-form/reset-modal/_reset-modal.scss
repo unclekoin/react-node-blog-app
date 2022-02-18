@@ -1,0 +1,60 @@
+.reset-modal {
+  position: absolute;
+  top: -100%;
+  z-index: $z-modal;
+  width: 30rem;
+  padding: 4rem 3rem;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  @include block-box-shadow;
+  transition: 0.5s;
+
+  &--open {
+    top: 5rem;
+  }
+
+  &__title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button {
+    padding: 0.5rem 1rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: $first-color;
+    border: 1px solid $first-color;
+    background-color: #ffffff;
+    transition: 0.3s;
+
+    &--confirm {
+      color: $danger-color;
+      border: 1px solid $danger-color;
+      border-right: none;
+      border-top-left-radius: 2rem;
+      border-bottom-left-radius: 2rem;
+
+      &:hover {
+        color: #ffffff;
+        background-color: $danger-color;
+      }
+    }
+
+    &--cancel {
+      color: $first-color;
+      border: 1px solid $first-color;
+      border-top-right-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+
+      &:hover {
+        color: #ffffff;
+        background-color: $first-color;
+      }
+    }
+  }
+}

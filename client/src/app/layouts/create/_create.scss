@@ -1,43 +1,8 @@
 .create {
-  position: relative;
   max-width: 1280px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 15rem 3rem;
-
-  &__preview-button {
-    position: fixed;
-    top: 17rem;
-    right: 25rem;
-    z-index: $z-modal;
-    width: 5rem;
-    height: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $first-color;
-    border: 2px solid $first-color;
-    border-radius: 50%;
-    background-color: #ffffff;
-    transition: 0.3s;
-
-    &:hover {
-      background-color: $first-color;
-      color: #ffffff;
-    }
-
-    &:disabled {
-      color: #ffffff;
-      background-color: $first-color-lighter;
-      border-color: $first-color-lighter;
-      cursor: default;
-    }
-
-    & .preview-icon {
-      font-size: 3.5rem;
-      color: inherit;
-    }
-  }
 
   &__header {
     width: 100%;
@@ -61,6 +26,7 @@
     }
 
     &-wrapper {
+      position: relative;
       width: 80%;
       display: flex;
       justify-content: space-between;
@@ -75,7 +41,8 @@
     &-image-button {
       width: 4rem;
       height: 4rem;
-      border: 2px solid $first-color;
+      border-top: 1px solid $first-color;
+      border-bottom: 1px solid $first-color;
       border-radius: 50%;
     }
 

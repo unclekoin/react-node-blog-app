@@ -22,11 +22,7 @@ const Create = () => {
     }
   }, [state]);
 
-  const isDisabled = Object.keys(data).length > 1 && data.title;
-
-  const savePreview = () => {
-    localStorage.preview = JSON.stringify(data);
-  };
+  const isDisabled = Object.keys(data).length < 2 && !data.title;
 
   const submitData = () => {
     console.log(data);
@@ -45,20 +41,13 @@ const Create = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toPreview = () => navigate('/preview');
+  const handlePreview = () => {
+    localStorage.preview = JSON.stringify(data);
+    navigate('/preview');
+  };
 
   return (
     <div className="create">
-      <button
-        onClick={() => {
-          savePreview();
-          toPreview();
-        }}
-        className="create__preview-button"
-        disabled={!isDisabled}
-      >
-        <i className="bi bi-eyeglasses preview-icon" />
-      </button>
       <div
         className={`create__header${
           offset > 30 ? ' create__header--shadow' : ''
@@ -70,7 +59,7 @@ const Create = () => {
             <button
               onClick={submitData}
               className="create__button"
-              disabled={!isDisabled}
+              disabled={isDisabled}
             >
               Опубликовать
             </button>
@@ -82,7 +71,15 @@ const Create = () => {
       </div>
       <div className="create__container">
         <Outlet
-          context={[typeFieldList, setTypesFieldList, data, setData, state]}
+          context={[
+            typeFieldList,
+            setTypesFieldList,
+            data,
+            setData,
+            handlePreview,
+            isDisabled,
+            state,
+          ]}
         />
       </div>
     </div>
