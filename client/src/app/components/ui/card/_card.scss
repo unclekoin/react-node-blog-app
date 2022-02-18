@@ -40,7 +40,9 @@
   }
 
   &__image {
-    max-width: 150px;
+    object-fit: cover;
+    width: 15rem;
+    height: 15rem;
   }
 
   &__footer {

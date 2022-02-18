@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { useModal } from '../../../hooks/use-modal';
 import TypesMenu from './types-menu/types-menu';
 import CreateFormInputGroup from './create-form-input-group/create-form-input-group';
 import ResetModal from './reset-modal/reset-modal';
 
 const CreateForm = () => {
+  const { toggleWindow } = useModal();
   const [isTypeMenuOpen, setTypeMenuOpen] = useState(false);
   const [count, setCount] = useState(1);
-  const [isResetModalOpen, setResetModalOpen] = useState(false);
   const [
     typeFieldList,
     setTypesFieldList,
@@ -48,28 +49,16 @@ const CreateForm = () => {
     }));
   };
 
-  const openResetModal = () => {
-    setResetModalOpen(true);
-  };
-
-  const closeResetModal = () => {
-    setResetModalOpen(false);
-  };
-
   const cleanForm = () => {
     setData({ title: '' });
     setTypesFieldList([]);
     if (localStorage.preview) localStorage.removeItem('preview');
-    closeResetModal();
+    toggleWindow();
   };
 
   return (
     <>
-      <ResetModal
-        open={isResetModalOpen}
-        onClose={closeResetModal}
-        cleanForm={cleanForm}
-      />
+      <ResetModal cleanForm={cleanForm} />
       <div className="create-form">
         <input
           onChange={handleTitleChange}
@@ -102,11 +91,16 @@ const CreateForm = () => {
             role="button"
           ></i>
         </div>
+        <div className="create-form__line"></div>
         <div className="create-form__buttons">
-          <button onClick={openResetModal} className="create-form__reset">
+          <button onClick={() => toggleWindow()} className="create-form__reset">
             Очистить форму
           </button>
-          <button onClick={handlePreview} className="create-form__preview" disabled={isDisabled}>
+          <button
+            onClick={handlePreview}
+            className="create-form__preview"
+            disabled={isDisabled}
+          >
             Предпросмотр
           </button>
         </div>

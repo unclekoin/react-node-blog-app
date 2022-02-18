@@ -1,8 +1,10 @@
 import React from 'react';
+import { useModal } from '../../../../hooks/use-modal'
 
-const ResetModal = ({ open, onClose, cleanForm }) => {
+const ResetModal = ({ cleanForm }) => {
+  const { isOpen, toggleWindow } = useModal();
   return (
-    <div className={`reset-modal${open ? ' reset-modal--open' : ''}`}>
+    <div className={`reset-modal${isOpen ? ' reset-modal--open' : ''}`}>
       <div className="reset-modal__title">Точно очистить?</div>
       <div className="reset-modal__buttons">
         <button
@@ -12,7 +14,7 @@ const ResetModal = ({ open, onClose, cleanForm }) => {
           Точно
         </button>
         <button
-          onClick={onClose}
+          onClick={toggleWindow}
           className="reset-modal__button reset-modal__button--cancel"
         >
           Подумаю еще

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../logo/logo';
 import NavbarLoginModal from './navbar-login-modal/navbar-login-modal';
 import avatar from '../../../../assets/images/avatar.png';
+import AvatarFrame from '../avatar-frame';
 
 const Navbar = () => {
   const [isNavModalOpen, setNavModalOpen] = useState(false);
@@ -38,13 +39,15 @@ const Navbar = () => {
           </li>
           <li className="navbar__item">
             <NavLink to="/create" className="navbar__link">
-              <i className="bi bi-pen"></i>
+              <i className="bi bi-pencil-square"></i>
             </NavLink>
           </li>
         </ul>
         <div className="navbar__login">
           <button onClick={toggleNavbarModal}>
-            <img className="navbar__login-image" src={avatar} alt="" />
+            <AvatarFrame>
+              <img className="navbar__login-image" src={avatar} alt="" />
+            </AvatarFrame>
           </button>
         </div>
       </nav>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Button from '../../ui/button/button';
-import { useCommentsModal } from '../../../hooks/use-comments-modal';
+import { useModal } from '../../../hooks/use-modal';
 import CommentsModal from '../../common/comments/comments-modal/comments-modal';
 import ArticleContent from '../../ui/article-content/article-content';
 import { getTimeToRead } from '../../../utils';
@@ -11,7 +11,7 @@ import avatar from '../../../../assets/images/avatar.png';
 function Article() {
   const { articleId } = useParams();
   const navigate = useNavigate();
-  const { toggleCommentsWindow } = useCommentsModal();
+  const { toggleWindow } = useModal();
 
   const goBack = () => navigate(-1);
 
@@ -36,12 +36,12 @@ function Article() {
         <ul className="article__action-list">
           {/* Здесь должна быть логика показа кнопки только администратору */}
           <li className="article__action-item">
-            <Link to={`/${articleId}/edit`}>
+            <Link to={`/edit/${articleId}`}>
               <i className="bi bi-pencil-square"></i>
             </Link>
           </li>
           <li className="article__action-item">
-            <button onClick={toggleCommentsWindow}>
+            <button onClick={toggleWindow}>
               <i className="bi bi-chat"></i>
             </button>
             <span>5</span>

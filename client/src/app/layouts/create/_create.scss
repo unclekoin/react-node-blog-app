@@ -4,13 +4,17 @@
   margin: 0 auto;
   padding: 15rem 3rem;
 
+  @include respond(phone) {
+    padding: 15rem 1rem;
+  }
+
   &__header {
     width: 100%;
     position: fixed;
     padding: 3rem 1rem;
     top: 0;
     left: 0;
-    z-index: $z-fixed;
+    z-index: $z-tooltip;
     display: flex;
     justify-content: center;
     background-color: #ffffff;
@@ -36,14 +40,6 @@
         width: 100%;
         padding: 0 3rem;
       }
-    }
-
-    &-image-button {
-      width: 4rem;
-      height: 4rem;
-      border-top: 1px solid $first-color;
-      border-bottom: 1px solid $first-color;
-      border-radius: 50%;
     }
 
     &-image {

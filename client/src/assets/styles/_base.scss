@@ -34,6 +34,11 @@ body {
   color:  $text-color;
 }
 
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
+
 ::selection {
   background-color: $first-color;
   color: #FFFFFF;

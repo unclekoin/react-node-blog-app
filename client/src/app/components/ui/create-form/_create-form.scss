@@ -71,4 +71,11 @@
       background-color: #fff;
     }
   }
+
+  &__line {
+    width: 100%;
+    height: 1px;
+    margin-bottom: 3rem;
+    background-color: $line-color;
+  }
 }

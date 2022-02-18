@@ -1,12 +1,16 @@
 import React from 'react';
-import { useCommentsModal } from '../../../hooks/use-comments-modal';
+import { useModal } from '../../../hooks/use-modal';
 
 const Overlay = () => {
-  const { isOpen, toggleCommentsWindow } = useCommentsModal();
-
+  const { isOpen, toggleWindow } = useModal();
+  if (isOpen) {
+    document.body.className = 'no-scroll';
+  } else {
+    document.body.removeAttribute('class');
+  }
   return (
     <div
-      onClick={toggleCommentsWindow}
+      onClick={toggleWindow}
       className={`overlay${isOpen ? ' overlay-open' : ''}`}
     ></div>
   );

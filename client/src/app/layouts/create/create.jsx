@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../../components/ui/logo';
+import AvatarFrame from '../../components/ui/avatar-frame';
 import avatar from '../../../assets/images/avatar.png';
 
 const Create = () => {
@@ -22,7 +23,7 @@ const Create = () => {
     }
   }, [state]);
 
-  const isDisabled = Object.keys(data).length < 2 && !data.title;
+  const isDisabled = Object.keys(data).length <= 2 && !data.title;
 
   const submitData = () => {
     console.log(data);
@@ -64,7 +65,13 @@ const Create = () => {
               Опубликовать
             </button>
             <button className="create__header-image-button">
-              <img className="create__header-image" src={avatar} alt="avatar" />
+              <AvatarFrame>
+                <img
+                  className="create__header-image"
+                  src={avatar}
+                  alt="avatar"
+                />
+              </AvatarFrame>
             </button>
           </div>
         </div>
