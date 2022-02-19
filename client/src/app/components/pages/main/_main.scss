@@ -3,6 +3,10 @@
   padding: 6rem 5rem;
   overflow: auto;
 
+  @include respond(tab-port) {
+    padding: 6rem 1rem;
+  }
+
   &::-webkit-scrollbar {
     width: 0;
   }

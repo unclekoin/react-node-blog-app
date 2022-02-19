@@ -1,7 +1,7 @@
 .navbar {
   position: relative;
   border-right: 1px solid $line-color;
-  
+
   &__nav {
     height: 100%;
     padding: 5rem 3rem;
@@ -9,6 +9,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+
+    @include respond(tab-port) {
+      padding: 2rem 1rem;
+      align-items: center;
+    }
   }
 
   &__item:not(:last-child) {
@@ -19,8 +24,12 @@
     &-image {
       width: 4rem;
       border-radius: 50%;
+
+      @include respond(phone) {
+        width: 3rem;
+      }
     }
-  
+
     &-modal {
       display: none;
       position: absolute;
@@ -31,22 +40,39 @@
       height: 10rem;
       padding: 2rem;
       border-radius: 3px;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       @include block-box-shadow;
+
+      @include respond(tab-port) {
+        width: 250px;
+        height: auto;
+        bottom: 7rem;
+      }
+
+      @include respond(phone) {
+        bottom: 6rem;
+      }
     }
 
     &-modal--open {
       display: block;
     }
-  
+
     &-triangle {
       position: absolute;
       bottom: -7px;
       left: 5rem;
       width: 20px;
       height: 20px;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       transform: rotate(45deg);
+
+      @include respond(tab-port) {
+        bottom: -5px;
+        left: 2rem;
+        width: 10px;
+        height: 10px;
+      }
     }
 
     &-line {
@@ -55,7 +81,7 @@
       height: 1px;
       background-color: $line-color;
     }
-  
+
     &-in,
     &-out {
       font-size: $font-sm;
@@ -72,5 +98,37 @@
     }
   }
 
-  
+  &__login-search,
+  &__login-tags {
+    display: none;
+
+    @include respond(phone) {
+      display: block;
+    }
+  }
+
+  &__login-search {
+    position: relative;
+  }
+
+  &__login-search-input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem 0.5rem 3rem;
+    border: 1px solid $line-color;
+    border-radius: 3px;
+    outline: 1px solid $first-color;
+  }
+
+  &__login-search-icon {
+    position: absolute;
+    top: 12px;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+  }
+
+  &__login-tags {
+    margin-bottom: 0.5rem;
+  }
 }

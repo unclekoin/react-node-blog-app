@@ -4,6 +4,7 @@
 @import './assets/styles/base';
 // @import "./styles/grid";
 @import './app/app';
+@import './app/layouts/wrapper/wrapper';
 @import './app/layouts/create/create';
 @import './app/layouts/login/login';
 @import './app/components/ui/create-form/create-form';
@@ -29,3 +30,5 @@
 @import './app/layouts/preview/preview';
 @import './app/components/ui/create-form/reset-modal/reset-modal';
 @import './app/components/ui/avatar-frame/avatar-frame';
+@import './app/components/ui/badge/badge';
+@import './app/components/pages/tags/tags';

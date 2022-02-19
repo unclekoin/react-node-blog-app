@@ -15,6 +15,7 @@ import LoginForm from './components/ui/login-form/login-form';
 import CreateForm from './components/ui/create-form/create-form';
 import Preview from './layouts/preview/preview';
 import ArticleContent from './components/ui/article-content/article-content';
+import Tags from './components/pages/tags/tags';
 
 const App = () => {
   const [favorites, setFavorite] = useState([]);
@@ -73,6 +74,9 @@ const App = () => {
           </Route>
           <Route path="preview/" element={<Preview />}>
             <Route index element={<ArticleContent />} />
+          </Route>
+          <Route path="tags/" >
+            <Route index element={<Tags />} />
           </Route>
         </Routes>
       </ModalProvider>

@@ -2,11 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { displayDate, getPath } from '../../../utils';
 import { getTimeToRead } from '../../../utils';
+import { getTagById } from '../../../../mock-data';
 import { users } from '../../../../mock-data';
+import Badge from '../badge/badge';
 
-const Card = ({ _id, author, title, content, create_at, addFavorite, favorites }) => {
+const Card = ({
+  _id,
+  author,
+  title,
+  content,
+  create_at,
+  tags,
+  addFavorite,
+  favorites,
+}) => {
   const snippet = content.find((element) => element.type === 'snippet').content;
-  const thumbnail = content.find((element) => element.type === 'image').content
+  const thumbnail = content.find((element) => element.type === 'image').content;
   const writer = users.find((user) => user._id === author);
   const isFavorite = favorites.includes(_id);
   const path = getPath(title);
@@ -14,36 +25,40 @@ const Card = ({ _id, author, title, content, create_at, addFavorite, favorites }
     <div className="card">
       <div className="card__header">
         <img src={writer.image} alt="author" className="card__header-avatar" />
-        <div className='card__header-wrapper'>
+        <div className="card__header-wrapper">
           <div className="card__header-author">{writer.name}</div>
           <div className="card__header-date">{displayDate(create_at)}</div>
         </div>
       </div>
       <div className="card__wrapper">
         <div className="card__container">
-          <Link to={`/article/${path}`} state={{articleId: _id}}>
+          <Link to={`/article/${path}`} state={{ articleId: _id }}>
             <div className="card__content">
               <h4 className="card__title">{title}</h4>
               <div className="card__snippet">{snippet}</div>
             </div>
           </Link>
           <div className="card__footer">
-            <span>
-              <span className="card__tag" role="button">
-                Java Script
-              </span>
-              <span className="card__how-long">{getTimeToRead(content)}</span>
+            <span className="card__badges">
+              {tags.map((tag, index) => (
+                <Badge key={tag} tag={getTagById(tag)} />
+              ))}
             </span>
-            <span onClick={() => addFavorite(_id)} role="button">
-              <i className={`bi bi-bookmark-${isFavorite ? 'dash-fill' : 'plus'} card__mark`}></i>
+            <span className="card__info">
+              <span className="card__how-long">{getTimeToRead(content)}</span>
+              <i
+                onClick={() => addFavorite(_id)}
+                className={`bi bi-bookmark-${
+                  isFavorite ? 'dash-fill' : 'plus'
+                } card__mark`}
+                role="button"
+              />
             </span>
           </div>
         </div>
-        <img
-          src={thumbnail}
-          alt=""
-          className="card__image"
-        />
+        <div className='card__image-container'>
+          <img src={thumbnail} alt="" className="card__image" />
+        </div>
       </div>
     </div>
   );

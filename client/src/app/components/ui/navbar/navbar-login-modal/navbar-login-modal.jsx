@@ -9,11 +9,24 @@ const NavbarLoginModal = ({ state, onClick }) => {
       }`}
     >
       <div className="navbar__login-triangle"></div>
+      <div className="navbar__login-search">
+        <i className="bi bi-search navbar__login-search-icon" role="button" />
+        <input
+          className="navbar__login-search-input"
+          type="text"
+          placeholder="Найти..."
+        />
+      </div>
       <Link to="/login" className="navbar__login-in">
         Войти
       </Link>
       <div className="navbar__login-line"></div>
-      <button onClick={onClick} className="navbar__login-out">Выйти из системы</button>
+      <Link className="navbar__login-tags" to="/tags">
+        Теги
+      </Link>
+      <button onClick={onClick} className="navbar__login-out">
+        Выйти из системы
+      </button>
     </div>
   );
 };

@@ -1,4 +1,4 @@
- export const tags = [
+export const tags = [
   {
     _id: '67rdca3eeb7f6fgeed471198',
     name: 'JavaScript',
@@ -48,3 +48,7 @@
     name: 'Next.js',
   },
 ];
+
+export const getTagById = (tagId) => {
+  return tags.find((tag) => tag._id === tagId);
+};
