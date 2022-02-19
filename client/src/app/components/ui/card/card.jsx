@@ -4,10 +4,11 @@ import { displayDate, getPath } from '../../../utils';
 import { getTimeToRead } from '../../../utils';
 import { users } from '../../../../mock-data';
 
-const Card = ({ _id, author, title, content, create_at }) => {
+const Card = ({ _id, author, title, content, create_at, addFavorite, favorites }) => {
   const snippet = content.find((element) => element.type === 'snippet').content;
   const thumbnail = content.find((element) => element.type === 'image').content
   const writer = users.find((user) => user._id === author);
+  const isFavorite = favorites.includes(_id);
   const path = getPath(title);
   return (
     <div className="card">
@@ -33,8 +34,8 @@ const Card = ({ _id, author, title, content, create_at }) => {
               </span>
               <span className="card__how-long">{getTimeToRead(content)}</span>
             </span>
-            <span role="button">
-              <i className="bi bi-bookmark-plus card__mark"></i>
+            <span onClick={() => addFavorite(_id)} role="button">
+              <i className={`bi bi-bookmark-${isFavorite ? 'dash-fill' : 'plus'} card__mark`}></i>
             </span>
           </div>
         </div>

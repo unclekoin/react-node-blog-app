@@ -1,16 +1,30 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Card from '../../ui/card';
 import { getLocalDate } from '../../../utils';
 import { articles } from '../../../../mock-data';
 
+const Main = ({ addFavorite, favorites }) => {
+  const location = useLocation();
+  const isFavoritesPage = location.pathname === '/favorites';
 
-const Main = () => {
+  const data = isFavoritesPage
+    ? articles.filter((article) => favorites.includes(article._id))
+    : articles;
+
   return (
     <div className="main">
-      <div className="main__header">Сегодня {getLocalDate()}</div>
+      <div className="main__header">
+        {!isFavoritesPage ? `Сегодня ${getLocalDate()}` : 'Избранное'}
+      </div>
       <div className="main__line"></div>
-      {articles.map((article) => (
-        <Card key={article._id} {...article} />
+      {data.map((article) => (
+        <Card
+          key={article._id}
+          {...article}
+          addFavorite={addFavorite}
+          favorites={favorites}
+        />
       ))}
     </div>
   );

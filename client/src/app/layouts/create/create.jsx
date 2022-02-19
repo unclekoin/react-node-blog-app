@@ -1,42 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import Logo from '../../components/ui/logo';
 import AvatarFrame from '../../components/ui/avatar-frame';
 import avatar from '../../../assets/images/avatar.png';
+import { getArticleById } from '../../../mock-data';
 
 const Create = () => {
   const [data, setData] = useState([
-    { _id: 'title-h1', type: 'title', content: '' },
+    { _id: nanoid(), type: 'title', content: '' },
   ]);
   const navigate = useNavigate();
   const { articleId } = useParams();
+  const article = getArticleById(articleId);
   const { state } = useLocation();
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('preview')) {
-  //     const savedData = JSON.parse(localStorage.getItem('preview'));
-  //     Object.keys(savedData)
-  //       .slice(1)
-  //       .forEach((key) => {
-  //         const [type] = key.split('zzz');
-  //         setTypesFieldList((prevState) => [...prevState, type]);
-  //       });
-  //     setData(savedData);
-  //   }
+  useEffect(() => {
+    if (localStorage.getItem('preview')) {
+      const savedData = JSON.parse(localStorage.getItem('preview'));
+      setData(savedData);
+    }
 
-  //   if (articleId) {
-  //     Object.keys(article)
-  //       .slice(1)
-  //       .forEach((key) => {
-  //         const [type] = key.split('zzz');
-  //         setTypesFieldList((prevState) => [...prevState, type]);
-  //       });
-  //       setData(article);
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+    if (articleId) {
+      setData([
+        { _id: 'title-h1', type: 'title', content: article.title },
+        ...article.content
+      ]);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const isDisabled = Object.keys(data).length <= 2 && !data.title;
+  const isDisabled = Object.keys(data).length <= 1 && !data.title;
 
   const submitData = () => {
     console.log(data);
@@ -62,8 +56,6 @@ const Create = () => {
   const removeElement = (elementId) => {
     console.log(elementId);
   };
-
-  console.log(data);
 
   return (
     <div className="create">

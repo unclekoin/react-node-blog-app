@@ -22,7 +22,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li className="navbar__item">
-            <NavLink to="/selected" className="navbar__link">
+            <NavLink to="/favorites" className="navbar__link">
               <i className="bi bi-bookmarks"></i>
             </NavLink>
           </li>

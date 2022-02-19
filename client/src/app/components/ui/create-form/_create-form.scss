@@ -67,8 +67,9 @@
 
     &:disabled {
       cursor: auto;
-      color: $text-color-light;
-      background-color: #fff;
+      color: #FFFFFF;
+      border-color: rgba($text-color-light, 0.1);
+      background-color: rgba($text-color-light, 0.3);
     }
   }
 

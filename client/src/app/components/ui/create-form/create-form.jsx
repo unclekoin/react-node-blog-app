@@ -9,20 +9,19 @@ import { nanoid } from 'nanoid';
 const CreateForm = () => {
   const { toggleWindow } = useModal();
   const [isTypeMenuOpen, setTypeMenuOpen] = useState(false);
-  const [count, setCount] = useState(1);
-  const [
-    data,
-    setData,
-    handlePreview,
-    isDisabled,
-    removeElement,
-  ] = useOutletContext();
+  const [data, setData, handlePreview, isDisabled, removeElement] =
+    useOutletContext();
+
+  const title = data.find((element) => element.type === 'title');
 
   const handleTitleChange = ({ target }) => {
-    setData((prevState) => ({
-      ...prevState,
-      [target.name]: target.value,
-    }));
+    setData((prevState) =>
+      prevState.map((element) =>
+        element.type === target.name
+          ? { ...element, content: target.value }
+          : element
+      )
+    );
   };
 
   const toggleTypesMenu = () => {
@@ -30,20 +29,24 @@ const CreateForm = () => {
   };
 
   const addInput = (type) => {
-    setData((prevState) => [...prevState, { _id: nanoid(), type, content: '' }]);
+    setData((prevState) => [
+      ...prevState,
+      { _id: nanoid(), type, content: '' },
+    ]);
   };
 
-  console.log(data);
-
   const handleInputChange = ({ target }) => {
-    setData((prevState) => ({
-      ...prevState,
-      [target.name]: target.value,
-    }));
+    setData((prevState) =>
+      prevState.map((element) =>
+        element._id === target.name
+          ? { ...element, content: target.value }
+          : element
+      )
+    );
   };
 
   const cleanForm = () => {
-    setData({ title: '' });
+    setData([{ _id: nanoid(), type: 'title', content: '' }]);
     if (localStorage.preview) localStorage.removeItem('preview');
     toggleWindow();
   };
@@ -55,23 +58,28 @@ const CreateForm = () => {
         <input
           onChange={handleTitleChange}
           name="title"
-          value={data.title}
+          value={title.content}
           className="create-form__title-input"
           type="text"
           placeholder="Введите заголовок..."
         />
         <div className="create-form__container">
           {data.length
-            ? data.map((typeField, index) => (
-                <CreateFormInputGroup
-                  key={`${typeField}-${index + 1}`}
-                  onChange={handleInputChange}
-                  value={data[`${typeField}zzz${index + 1}`] || ''}
-                  name={`${typeField}zzz${index + 1}`}
-                  typeField={typeField}
-                  removeElement={removeElement}
-                />
-              ))
+            ? data.map(({ _id, type, content }) => {
+                if (type !== 'title') {
+                  return (
+                    <CreateFormInputGroup
+                      key={_id}
+                      onChange={handleInputChange}
+                      value={content || ''}
+                      name={_id}
+                      type={type}
+                      removeElement={removeElement}
+                    />
+                  );
+                }
+                return null;
+              })
             : null}
         </div>
         <div className="create-form__menu-buttons">

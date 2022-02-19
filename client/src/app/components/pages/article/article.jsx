@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Button from '../../ui/button/button';
 import { useModal } from '../../../hooks/use-modal';
 import CommentsModal from '../../common/comments/comments-modal/comments-modal';
@@ -7,13 +7,13 @@ import ArticleContent from '../../ui/article-content/article-content';
 import { getTimeToRead } from '../../../utils';
 import { getArticleById, getUserById } from '../../../../mock-data';
 
-function Article() {
-  const { articleId } = useParams();
+function Article({ addFavorite, favorites }) {
   const {state} = useLocation();
   const article = getArticleById(state.articleId);
   const {name, image} = getUserById(article.author);
   const navigate = useNavigate();
   const { toggleWindow } = useModal();
+  const isFavorite = favorites.includes(state.articleId);
 
   const goBack = () => navigate(-1);
 
@@ -38,7 +38,7 @@ function Article() {
         <ul className="article__action-list">
           {/* Здесь должна быть логика показа кнопки только администратору */}
           <li className="article__action-item">
-            <Link to={`/edit/${articleId}`}>
+            <Link to={`/edit/${article._id}`}>
               <i className="bi bi-pencil-square"></i>
             </Link>
           </li>
@@ -52,11 +52,11 @@ function Article() {
             <button>
               <i className="bi bi-hand-thumbs-up"></i>
             </button>
-            <span>35</span>
+            <span>{article.rate}</span>
           </li>
           <li className="article__action-item">
-            <button>
-              <i className="bi bi-bookmark-plus"></i>
+            <button onClick={() => addFavorite(state.articleId)}>
+              <i className={`bi bi-bookmark-${isFavorite ? 'dash-fill' : 'plus'}`}></i>
             </button>
           </li>
         </ul>

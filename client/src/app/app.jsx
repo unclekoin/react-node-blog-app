@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Main from './components/pages/main';
 import Article from './components/pages/article';
 import About from './components/pages/about';
 import Contacts from './components/pages/contacts';
 import NotFound from './components/pages/not-found';
-import Selected from './components/pages/selected';
 import Wrapper from './layouts/wrapper';
 import Create from './layouts/create';
 import Login from './layouts/login';
@@ -18,15 +17,46 @@ import Preview from './layouts/preview/preview';
 import ArticleContent from './components/ui/article-content/article-content';
 
 const App = () => {
+  const [favorites, setFavorite] = useState([]);
+
+  const addFavorite = (articleId) => {
+    if (favorites.includes(articleId)) {
+      setFavorite((prevState) => prevState.filter((id) => id !== articleId));
+    } else {
+      setFavorite((prevState) => [...prevState, articleId]);
+    }
+  };
+
+  useEffect(() => {
+    if (localStorage.favorites) {
+      setFavorite(JSON.parse(localStorage.getItem('favorites')));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.favorites = JSON.stringify(favorites);
+  }, [favorites]);
+
   return (
     <>
       <ModalProvider>
         <Overlay />
         <Routes>
           <Route path="/" element={<Wrapper />}>
-            <Route index element={<Main />} />
-            <Route path="article/:articleId" element={<Article />} />
-            <Route path="selected" element={<Selected />} />
+            <Route
+              index
+              element={<Main addFavorite={addFavorite} favorites={favorites} />}
+            />
+            <Route
+              path="article/:articleId"
+              element={
+                <Article addFavorite={addFavorite} favorites={favorites} />
+              }
+            />
+            <Route
+              path="favorites"
+              element={<Main addFavorite={addFavorite} favorites={favorites} />}
+            />
             <Route path="about" element={<About />} />
             <Route path="contacts" element={<Contacts />} />
             <Route path="*" element={<NotFound />} />

@@ -7,12 +7,12 @@ const ArticleContent = ({ title, content }) => {
   const data = location.pathname.includes('/preview')
     ? JSON.parse(localStorage.getItem('preview'))
     : content;
-
-
+  
+  const h1 = title || data.find((element) => element.type === 'title').content;
 
   return (
     <div className="article-content">
-      <h1 className="article-content__title">{title}</h1>
+      <h1 className="article-content__title">{h1}</h1>
       {data.map((item) => {
         switch (item.type) {
           case 'snippet':
