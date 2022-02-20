@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../../../ui/button';
 import avatar from './../../../../../assets/images/avatar.png';
 
 const CommentsForm = () => {
@@ -13,6 +14,9 @@ const CommentsForm = () => {
         name="comment"
         placeholder="Что ты думаешь?"
       ></textarea>
+      <div className="comments-form__button">
+        <Button>Отправить</Button>
+      </div>
     </div>
   );
 };

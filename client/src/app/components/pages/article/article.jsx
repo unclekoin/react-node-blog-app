@@ -15,7 +15,6 @@ function Article({ addFavorite, favorites }) {
   const navigate = useNavigate();
   const { toggleWindow } = useModal();
   const isFavorite = favorites.includes(state.articleId);
-  console.log(article.tags);
 
   const goBack = () => navigate(-1);
 

@@ -3,12 +3,26 @@
   padding: 6rem 5rem;
   overflow: auto;
 
+  @include respond(tab-port) {
+    padding: 4rem 1rem;
+  }
+
+  @include respond(phone) {
+    padding: 2rem 1rem;
+  }
+
   &::-webkit-scrollbar {
     width: 0;
   }
 
   &__button {
     margin-bottom: 3rem;
+
+    @include respond(phone) {
+      margin: 0 auto;
+      margin-bottom: 2rem;
+      
+    }
   }
 
   &__line {
@@ -16,6 +30,10 @@
     height: 1px;
     margin-bottom: 3rem;
     background-color: $line-color;
+
+    @include respond(phone) {
+      margin-bottom: 2rem;
+    }
   }
 
   &__author {

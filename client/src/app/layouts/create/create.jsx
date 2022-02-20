@@ -54,7 +54,8 @@ const Create = () => {
   };
 
   const removeElement = (elementId) => {
-    console.log(elementId);
+    const newData = [...data].filter((element) => element._id !== elementId);
+    setData(newData);
   };
 
   return (

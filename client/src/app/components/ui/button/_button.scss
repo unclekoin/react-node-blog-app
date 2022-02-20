@@ -7,6 +7,10 @@
   border-radius: 2.5rem;
   transition: 0.3s;
 
+  @include respond(phone) {
+    padding: 0.5rem 2rem;
+  }
+
   &:hover {
     background-color: $text-color-light;
     color: #FFFFFF;

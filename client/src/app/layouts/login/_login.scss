@@ -4,6 +4,14 @@
   margin: 0 auto;
   padding: 5rem;
 
+  @include respond(tab-port) {
+    padding: 3rem 2rem;
+  }
+
+  @include respond(phone) {
+    padding: 3rem 1rem;
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;

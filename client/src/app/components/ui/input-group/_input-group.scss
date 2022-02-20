@@ -19,7 +19,7 @@
       outline: none;
       cursor: pointer;
 
-      @include respond(tab-port) {
+      @include respond(phone) {
         width: 30rem;
       }
     }
@@ -33,7 +33,8 @@
     border-radius: 3px;
     outline-color: $first-color;
 
-    @include respond(tab-port) {
+
+    @include respond(phone) {
       width: 30rem;
     }
 

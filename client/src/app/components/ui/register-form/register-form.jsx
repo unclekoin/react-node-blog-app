@@ -14,7 +14,7 @@ const RegisterForm = () => {
     reset,
     handleSubmit,
   } = useForm({
-    mode: 'onChange'
+    mode: 'onChange',
   });
 
   const onSubmit = (data) => {
@@ -54,7 +54,11 @@ const RegisterForm = () => {
         placeholder="Выбрать фото..."
         register={register}
       />
-      <Button onClick={goBack} iaDisabled={!isValid}>Отправить</Button>
+      <div className="register-form__button">
+        <Button onClick={goBack} iaDisabled={!isValid}>
+          Отправить
+        </Button>
+      </div>
       <div className="register-form__question">
         Уже есть аккаунт?{' '}
         <Link className="register-form__link" to="/login">

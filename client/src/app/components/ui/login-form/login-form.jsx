@@ -13,7 +13,7 @@ const LoginForm = () => {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm({
-    mode: 'onChange'
+    mode: 'onChange',
   });
 
   const onSubmit = (data) => {
@@ -38,7 +38,11 @@ const LoginForm = () => {
         errors={errors}
         register={register}
       />
-      <Button onClick={goBack} isDisabled={!isValid}>Отправить</Button>
+      <div className="login-form__button">
+        <Button onClick={goBack} isDisabled={!isValid}>
+          Отправить
+        </Button>
+      </div>
       <div className="login-form__question">
         Еще нет аккаунта?{' '}
         <Link className="login-form__link" to="/login/register">

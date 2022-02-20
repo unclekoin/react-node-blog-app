@@ -40,7 +40,6 @@ const CreateFormInputGroup = ({
 };
 
 const getPlaceholderText = (type) => {
-  console.log(type);
   switch (type) {
     case 'snippet':
       return 'Введите текст сниппета...';
