@@ -22,7 +22,7 @@ const Sidebar = () => {
 
             <div className="sidebar__social">
               <div className="sidebar__social-title">
-                Ищите информцию обо мне в социальных сетях:
+                Ищите информцию о нас в социальных сетях:
               </div>
               <ul className="sidebar__social-links">
                 <li className="sidebar__social-link">

@@ -58,10 +58,12 @@ const App = () => {
               path="favorites"
               element={<Main addFavorite={addFavorite} favorites={favorites} />}
             />
-            <Route path="about" element={<About />} />
-            <Route path="contacts" element={<Contacts />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+          <Route>
+          <Route path="/about" element={<About />} />
+          <Route path="/contacts" element={<Contacts />} />
+        </Route>
           <Route path="login/" element={<Login />}>
             <Route index element={<LoginForm />} />
             <Route path="register" element={<RegisterForm />} />
@@ -75,7 +77,7 @@ const App = () => {
           <Route path="preview/" element={<Preview />}>
             <Route index element={<ArticleContent />} />
           </Route>
-          <Route path="tags/" >
+          <Route path="tags/">
             <Route index element={<Tags />} />
           </Route>
         </Routes>
