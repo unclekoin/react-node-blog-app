@@ -3,11 +3,7 @@ import { useModal } from '../../../hooks/use-modal';
 
 const Overlay = () => {
   const { isOpen, toggleWindow } = useModal();
-  if (isOpen) {
-    document.body.className = 'no-scroll';
-  } else {
-    document.body.removeAttribute('class');
-  }
+
   return (
     <div
       onClick={toggleWindow}

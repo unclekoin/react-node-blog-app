@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { displayDate, getPath } from '../../../utils';
 import { getTimeToRead } from '../../../utils';
 import { getTagById } from '../../../../mock-data';
@@ -16,13 +16,14 @@ const Card = ({
   addFavorite,
   favorites,
 }) => {
+  const location = useLocation();
   const snippet = content.find((element) => element.type === 'snippet').content;
   const thumbnail = content.find((element) => element.type === 'image').content;
   const writer = users.find((user) => user._id === author);
   const isFavorite = favorites.includes(_id);
   const path = getPath(title);
   return (
-    <div className="card">
+    <div className="card" id={_id}>
       <div className="card__header">
         <img src={writer.image} alt="author" className="card__header-avatar" />
         <div className="card__header-wrapper">
@@ -32,7 +33,7 @@ const Card = ({
       </div>
       <div className="card__wrapper">
         <div className="card__container">
-          <Link to={`/article/${path}`} state={{ articleId: _id }}>
+          <Link to={`/article/${path}`} state={{ pathname: location.pathname, articleId: _id }}>
             <div className="card__content">
               <h4 className="card__title">{title}</h4>
               <div className="card__snippet">{snippet}</div>

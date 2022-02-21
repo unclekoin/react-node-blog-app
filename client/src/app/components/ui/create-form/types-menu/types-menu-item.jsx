@@ -1,7 +1,7 @@
 import React from 'react';
 import { getInputTypesList } from '../../../../utils';
 
-const TypesMenuItem = ({ type, addInput }) => {
+const TypesMenuItem = ({ type, addInput, focusHandler }) => {
   const typeList = getInputTypesList();
   const getToolTip = () => {
     switch (type) {
@@ -13,18 +13,25 @@ const TypesMenuItem = ({ type, addInput }) => {
         return 'Подзаголовок';
       case 'divider':
         return 'Линия';
-        case 'snippet':
+      case 'snippet':
         return 'Сниппет';
-        case 'conclusion':
-          return 'Заключение';
+      case 'conclusion':
+        return 'Заключение';
       default:
         return;
     }
   };
+
+  const handleClick = (type) => {
+    addInput(type);
+    setTimeout(() => {
+      focusHandler();
+    }, 0);    
+  };
   return (
     <li className="types-menu__item">
       <i
-        onClick={() => addInput(type)}
+        onClick={() => handleClick(type)}
         className={`bi bi-${typeList[type]} types-menu__icon`}
         data-tooltip={getToolTip()}
         role="button"

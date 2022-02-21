@@ -7,6 +7,7 @@ import { articles } from '../../../../mock-data';
 const Main = ({ addFavorite, favorites }) => {
   const location = useLocation();
   const isFavoritesPage = location.pathname === '/favorites';
+  console.log(location);
 
   const data = isFavoritesPage
     ? articles.filter((article) => favorites.includes(article._id))
@@ -17,15 +18,14 @@ const Main = ({ addFavorite, favorites }) => {
       <div className="main__header">
         {!isFavoritesPage ? `Сегодня ${getLocalDate()}` : 'Избранное'}
       </div>
-      <div className="main__line"></div>
-      {data.map((article) => (
-        <Card
-          key={article._id}
-          {...article}
-          addFavorite={addFavorite}
-          favorites={favorites}
-        />
-      ))}
+        {data.map((article) => (
+          <Card
+            key={article._id}
+            {...article}
+            addFavorite={addFavorite}
+            favorites={favorites}
+          />
+        ))}
     </div>
   );
 };

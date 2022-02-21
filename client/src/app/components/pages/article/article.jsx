@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Button from '../../ui/button/button';
 import { useModal } from '../../../hooks/use-modal';
 import CommentsModal from '../../common/comments/comments-modal/comments-modal';
@@ -9,21 +9,22 @@ import { getArticleById, getUserById, getTagById } from '../../../../mock-data';
 import Badge from '../../ui/badge/badge';
 
 function Article({ addFavorite, favorites }) {
-  const { state } = useLocation();
-  const article = getArticleById(state.articleId);
+  const {
+    state: { pathname, articleId },
+  } = useLocation();
+  const article = getArticleById(articleId);
   const { name, image } = getUserById(article.author);
-  const navigate = useNavigate();
   const { toggleWindow } = useModal();
-  const isFavorite = favorites.includes(state.articleId);
-
-  const goBack = () => navigate(-1);
+  const isFavorite = favorites.includes(articleId);
 
   return (
     <>
       <CommentsModal />
       <div className="article">
         <div className="article__button">
-          <Button onClick={goBack}>Назад</Button>
+          <Link to={`${pathname}#${articleId}`}>
+            <Button>Назад</Button>
+          </Link>
         </div>
         <div className="article__line"></div>
         <div className="article__author-block">
@@ -35,7 +36,7 @@ function Article({ addFavorite, favorites }) {
             </span>
           </div>
         </div>
-        <ArticleContent {...article} />
+          <ArticleContent {...article} />
         <div className="article__line"></div>
         <div className="article__footer">
           <ul className="article__tag-list">
@@ -46,7 +47,7 @@ function Article({ addFavorite, favorites }) {
           <ul className="article__action-list">
             {/* Здесь должна быть логика показа кнопки только администратору */}
             <li className="article__action-item article__action-item--edit">
-              <Link to={`/edit/${article._id}`}>
+              <Link to={`/edit/${articleId}`}>
                 <i className="bi bi-pencil-square"></i>
               </Link>
             </li>
@@ -63,7 +64,7 @@ function Article({ addFavorite, favorites }) {
               <span>{article.rate}</span>
             </li>
             <li className="article__action-item">
-              <button onClick={() => addFavorite(state.articleId)}>
+              <button onClick={() => addFavorite(articleId)}>
                 <i
                   className={`bi bi-bookmark-${
                     isFavorite ? 'dash-fill' : 'plus'

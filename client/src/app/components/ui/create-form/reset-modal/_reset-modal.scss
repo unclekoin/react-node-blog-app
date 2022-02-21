@@ -1,5 +1,5 @@
 .reset-modal {
-  position: absolute;
+  position: fixed;
   top: -100%;
   z-index: $z-modal;
   width: 50rem;
@@ -14,7 +14,8 @@
   }
 
   &--open {
-    top: 5rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   &__title {
@@ -38,8 +39,7 @@
 
     &--confirm {
       color: $danger-color;
-      border: 1px solid $danger-color;
-      border-right-color: transparent;
+      border: 0.5px solid $danger-color;
       border-top-left-radius: 2rem;
       border-bottom-left-radius: 2rem;
 
@@ -48,10 +48,6 @@
         background-color: $danger-color;
         border-right: 1px solid $danger-color;
       }
-
-      &:hover  + .reset-modal__button--cancel {
-        border-left-color: transparent;
-      }
     }
 
     &--cancel {
@@ -59,6 +55,7 @@
       border: 1px solid $first-color;
       border-top-right-radius: 2rem;
       border-bottom-right-radius: 2rem;
+      border-left-color: transparent;
 
       &:hover {
         color: #ffffff;

@@ -10,10 +10,13 @@ const Create = () => {
   const [data, setData] = useState([
     { _id: nanoid(), type: 'title', content: '' },
   ]);
+  const [articleTags, setArticleTags] = useState();
   const navigate = useNavigate();
   const { articleId } = useParams();
   const article = getArticleById(articleId);
   const { state } = useLocation();
+
+  console.log(articleTags);
 
   useEffect(() => {
     if (localStorage.getItem('preview')) {
@@ -21,14 +24,24 @@ const Create = () => {
       setData(savedData);
     }
 
+    if (localStorage.getItem('tags')) {
+      const savedTags = JSON.parse(localStorage.getItem('tags'));
+      setArticleTags(savedTags);
+    }
+
     if (articleId) {
       setData([
         { _id: 'title-h1', type: 'title', content: article.title },
-        ...article.content
+        ...article.content,
       ]);
+      setArticleTags(article.tags);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleSelectChange = (tags) => {
+    setArticleTags(tags);
+  };
 
   const isDisabled = Object.keys(data).length <= 1 && !data.title;
 
@@ -50,6 +63,7 @@ const Create = () => {
 
   const handlePreview = () => {
     localStorage.preview = JSON.stringify(data);
+    localStorage.tags = JSON.stringify(articleTags);
     navigate('/preview');
   };
 
@@ -92,6 +106,8 @@ const Create = () => {
           context={[
             data,
             setData,
+            articleTags,
+            handleSelectChange,
             handlePreview,
             isDisabled,
             removeElement,

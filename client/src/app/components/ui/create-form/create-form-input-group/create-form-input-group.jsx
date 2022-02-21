@@ -6,6 +6,7 @@ const CreateFormInputGroup = ({
   type,
   value,
   name,
+  inputRef,
   onChange,
   removeElement,
 }) => {
@@ -13,6 +14,7 @@ const CreateFormInputGroup = ({
     <div className="create-form-input-group">
       {type === 'snippet' || type === 'text' || type === 'conclusion' ? (
         <TextareaAutosize
+          ref={inputRef}
           onChange={onChange}
           value={value}
           name={name}
@@ -22,6 +24,7 @@ const CreateFormInputGroup = ({
         <Divider />
       ) : (
         <input
+          ref={inputRef}
           onChange={onChange}
           value={value}
           name={name}
