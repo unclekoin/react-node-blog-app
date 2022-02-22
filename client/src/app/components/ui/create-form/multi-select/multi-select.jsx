@@ -14,7 +14,7 @@ const MultiSelect = ({ name, options, onChange, optionsDefault = [] }) => {
 
   return (
     <Select
-      defaultValue={defaultValue}
+      value={defaultValue}
       options={options}
       className="multi-select"
       classNamePrefix="multi-select"

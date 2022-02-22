@@ -20,6 +20,7 @@ const CreateForm = () => {
     handlePreview,
     isDisabled,
     removeElement,
+    clearForm
   ] = useOutletContext();
 
   const selectOptions = tags.map((option) => ({
@@ -62,15 +63,6 @@ const CreateForm = () => {
           : element
       )
     );
-  };
-
-
-  const clearForm = () => {
-    setData([{ _id: nanoid(), type: 'title', content: '' }]);
-    if (localStorage.preview) localStorage.removeItem('preview');
-    if (localStorage.tags) localStorage.removeItem('tags');
-    handleSelectChange(null);
-    toggleWindow();
   };
 
   return (

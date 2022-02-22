@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import { useModal } from '../../hooks/use-modal';
 import Logo from '../../components/ui/logo';
 import AvatarFrame from '../../components/ui/avatar-frame';
 import avatar from '../../../assets/images/avatar.png';
@@ -14,9 +15,7 @@ const Create = () => {
   const navigate = useNavigate();
   const { articleId } = useParams();
   const article = getArticleById(articleId);
-  // const articleTags = localStorage.getItem('tags')
-  //   ? JSON.parse(localStorage.getItem('tags'))
-  //   : article.tags;
+  const { toggleWindow } = useModal();
 
   console.log(articleTags);
 
@@ -25,15 +24,17 @@ const Create = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('preview')) {
-      const savedData = JSON.parse(localStorage.getItem('preview'));
-      setData(savedData);
-    } else {
-      setData([
-        { _id: 'title-h1', type: 'title', content: article.title },
-        ...article.content,
-      ]);
-      setArticleTags(article.tags);
+    if (articleId) {
+      if (localStorage.getItem('preview')) {
+        setData(JSON.parse(localStorage.getItem('preview')));
+        setArticleTags(JSON.parse(localStorage.getItem('tags')));
+      } else {
+        setData([
+          { _id: 'title-h1', type: 'title', content: article.title },
+          ...article.content,
+        ]);
+        setArticleTags(article.tags);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -68,6 +69,14 @@ const Create = () => {
   const removeElement = (elementId) => {
     const newData = [...data].filter((element) => element._id !== elementId);
     setData(newData);
+  };
+
+  const clearForm = () => {
+    setData([{ _id: nanoid(), type: 'title', content: '' }]);
+    if (localStorage.preview) localStorage.removeItem('preview');
+    if (localStorage.tags) localStorage.removeItem('tags');
+    setArticleTags([]);
+    toggleWindow();
   };
 
   return (
@@ -109,6 +118,7 @@ const Create = () => {
             handlePreview,
             isDisabled,
             removeElement,
+            clearForm,
           ]}
         />
       </div>
