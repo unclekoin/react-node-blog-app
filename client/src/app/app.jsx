@@ -61,19 +61,22 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route>
-          <Route path="/about" element={<About />} />
-          <Route path="/contacts" element={<Contacts />} />
-        </Route>
+            <Route path="/about" element={<About />} />
+            <Route path="/contacts" element={<Contacts />} />
+          </Route>
           <Route path="login/" element={<Login />}>
             <Route index element={<LoginForm />} />
             <Route path="register" element={<RegisterForm />} />
           </Route>
+
           <Route path="create/" element={<Create />}>
             <Route index element={<CreateForm />} />
           </Route>
+
           <Route path="edit/:articleId" element={<Create />}>
             <Route index element={<CreateForm />} />
           </Route>
+
           <Route path="preview/" element={<Preview />}>
             <Route index element={<ArticleContent />} />
           </Route>

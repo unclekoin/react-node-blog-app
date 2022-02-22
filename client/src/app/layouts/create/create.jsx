@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import Logo from '../../components/ui/logo';
 import AvatarFrame from '../../components/ui/avatar-frame';
@@ -14,22 +14,21 @@ const Create = () => {
   const navigate = useNavigate();
   const { articleId } = useParams();
   const article = getArticleById(articleId);
-  const { state } = useLocation();
+  // const articleTags = localStorage.getItem('tags')
+  //   ? JSON.parse(localStorage.getItem('tags'))
+  //   : article.tags;
 
   console.log(articleTags);
+
+  const handleSelectChange = (tagIds) => {
+    setArticleTags(tagIds);
+  };
 
   useEffect(() => {
     if (localStorage.getItem('preview')) {
       const savedData = JSON.parse(localStorage.getItem('preview'));
       setData(savedData);
-    }
-
-    if (localStorage.getItem('tags')) {
-      const savedTags = JSON.parse(localStorage.getItem('tags'));
-      setArticleTags(savedTags);
-    }
-
-    if (articleId) {
+    } else {
       setData([
         { _id: 'title-h1', type: 'title', content: article.title },
         ...article.content,
@@ -39,16 +38,15 @@ const Create = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSelectChange = (tags) => {
-    setArticleTags(tags);
-  };
-
   const isDisabled = Object.keys(data).length <= 1 && !data.title;
 
   const submitData = () => {
     console.log(data);
-    setData({ title: '' });
+    console.log(articleTags);
+    setData({ _id: nanoid(), type: 'title', content: '' });
     localStorage.removeItem('preview');
+    localStorage.removeItem('tags');
+    navigate('/');
   };
 
   const [offset, setOffset] = useState(0);
@@ -111,7 +109,6 @@ const Create = () => {
             handlePreview,
             isDisabled,
             removeElement,
-            state,
           ]}
         />
       </div>

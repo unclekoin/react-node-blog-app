@@ -65,16 +65,17 @@ const CreateForm = () => {
   };
 
 
-  const cleanForm = () => {
+  const clearForm = () => {
     setData([{ _id: nanoid(), type: 'title', content: '' }]);
     if (localStorage.preview) localStorage.removeItem('preview');
     if (localStorage.tags) localStorage.removeItem('tags');
+    handleSelectChange(null);
     toggleWindow();
   };
 
   return (
     <>
-      <ResetModal cleanForm={cleanForm} />
+      <ResetModal clearForm={clearForm} />
       <div className="create-form">
         <input
           autoFocus
