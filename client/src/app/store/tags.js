@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import tagsService from "../services/tags.service";
+import { createSlice } from '@reduxjs/toolkit';
+import tagsService from '../services/tags.service';
 
 const tagsSlice = createSlice({
-  name: "tags",
+  name: 'tags',
   initialState: {
     entities: null,
     isLoading: true,
     error: null,
-    lastFetch: null
+    lastFetch: null,
   },
   reducers: {
     tagsRequested(state) {
@@ -21,8 +21,8 @@ const tagsSlice = createSlice({
     tagsRequestFiled(state, action) {
       state.error = action.payload;
       state.isLoading = false;
-    }
-  }
+    },
+  },
 });
 
 const { reducer: tagsReducer, actions } = tagsSlice;
@@ -48,7 +48,10 @@ export const loadTagsList = () => async (dispatch, getState) => {
 export const getTags = () => (state) => state.tags.entities;
 export const getTagsLoadingStatus = () => (state) => state.tags.isLoading;
 export const getTagsByIds = (tagsIds) => (state) => {
-  return state.tags.entities.filter((tag) => tagsIds.includes(tag._id))
+  if (state.tags.entities && tagsIds) {
+    return state.tags.entities.filter((tag) => tagsIds.includes(tag._id));
+  }
+  return [];
 };
 
 export default tagsReducer;

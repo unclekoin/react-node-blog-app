@@ -2,9 +2,6 @@ import React from 'react';
 import Select from 'react-select';
 
 const MultiSelect = ({ name, options, onChange, optionsDefault = [] }) => {
-  const defaultValue = options.filter((option) =>
-  optionsDefault.includes(option.value)
-  );
 
   const handleChange = (value) => {
     onChange(value.map((item) => item.value));
@@ -12,7 +9,7 @@ const MultiSelect = ({ name, options, onChange, optionsDefault = [] }) => {
 
   return (
     <Select
-      value={defaultValue}
+      value={optionsDefault}
       options={options}
       className="multi-select"
       classNamePrefix="multi-select"

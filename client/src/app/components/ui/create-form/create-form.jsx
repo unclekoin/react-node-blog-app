@@ -1,14 +1,16 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { useOutletContext } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import { useModal } from '../../../hooks/use-modal';
+import { getTags, getTagsByIds } from '../../../store/tags';
 import MultiSelect from './multi-select/multi-select';
 import TypesMenu from './types-menu/types-menu';
 import CreateFormInputGroup from './create-form-input-group/create-form-input-group';
 import ResetModal from './reset-modal/reset-modal';
-import { nanoid } from 'nanoid';
-import { tags } from '../../../../mock-data/index';
 
 const CreateForm = () => {
+  const tags = useSelector(getTags());
   const inputRef = useRef(null);
   const { toggleWindow } = useModal();
   const [isTypeMenuOpen, setTypeMenuOpen] = useState(false);
@@ -20,8 +22,13 @@ const CreateForm = () => {
     handlePreview,
     isDisabled,
     removeElement,
-    clearForm
+    clearForm,
   ] = useOutletContext();
+
+  const defaultTags = useSelector(getTagsByIds(articleTags)).map((option) => ({
+    label: option.name,
+    value: option._id,
+  }));
 
   const selectOptions = tags.map((option) => ({
     label: option.name,
@@ -115,7 +122,7 @@ const CreateForm = () => {
         <MultiSelect
           onChange={handleSelectChange}
           options={selectOptions}
-          optionsDefault={articleTags}
+          optionsDefault={defaultTags}
           placeholder="Выбрать теги..."
           name="tags"
         />

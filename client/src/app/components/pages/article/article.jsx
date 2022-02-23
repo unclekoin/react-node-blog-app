@@ -1,28 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { getArticleById, getArticlesLoadingStatus } from '../../../store/articles';
-import Button from '../../ui/button/button';
+import {
+  getArticleById,
+  getArticlesLoadingStatus,
+} from '../../../store/articles';
 import { useModal } from '../../../hooks/use-modal';
+import { getTimeToRead } from '../../../utils';
+import { getUserById } from '../../../store/users';
+import { getTagsByIds, getTagsLoadingStatus } from '../../../store/tags';
 import CommentsModal from '../../common/comments/comments-modal/comments-modal';
 import ArticleContent from '../../ui/article-content/article-content';
-import { getTimeToRead } from '../../../utils';
+import Button from '../../ui/button/button';
 import Badge from '../../ui/badge/badge';
-import { getUserById } from '../../../store/users';
-import { getTagsByIds } from '../../../store/tags';
 
 function Article({ addFavorite, favorites }) {
   const {
     state: { pathname, articleId },
   } = useLocation();
   const article = useSelector(getArticleById(articleId));
-  const isArticleLoading = useSelector(getArticlesLoadingStatus())
+  const isArticleLoading = useSelector(getArticlesLoadingStatus());
+  const isLoadingTags = useSelector(getTagsLoadingStatus());
   const { name, image } = useSelector(getUserById(article.author));
-  const tags = useSelector(getTagsByIds(article.tags))
+  const tags = useSelector(getTagsByIds(article.tags));
   const { toggleWindow } = useModal();
   const isFavorite = favorites.includes(articleId);
 
-  if (isArticleLoading) return <h3>Loading...</h3>
+  if (isArticleLoading || isLoadingTags) return <h3>Loading...</h3>;
 
   return (
     <>
@@ -43,7 +47,7 @@ function Article({ addFavorite, favorites }) {
             </span>
           </div>
         </div>
-          <ArticleContent {...article} />
+        <ArticleContent {...article} />
         <div className="article__line"></div>
         <div className="article__footer">
           <ul className="article__tag-list">

@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getTagsByIds } from '../../../store/tags';
 import {
   getUserById,
   getUsersLoadingStatus,
-  loadUsersList,
 } from '../../../store/users';
 import { displayDate, getPath } from '../../../utils';
 import { getTimeToRead } from '../../../utils';
@@ -21,7 +20,6 @@ const Card = ({
   addFavorite,
   favorites,
 }) => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const snippet = content.find((element) => element.type === 'snippet').content;
   const thumbnail = content.find((element) => element.type === 'image').content;
@@ -30,11 +28,6 @@ const Card = ({
   const writer = useSelector(getUserById(author));
   const isUserLoading = useSelector(getUsersLoadingStatus());
   const path = getPath(title);
-
-  useEffect(() => {
-    dispatch(loadUsersList());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   if (isUserLoading) return <div>Loading...</div>;
 

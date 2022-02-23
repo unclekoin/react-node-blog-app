@@ -42,6 +42,5 @@ export const getPath = (title) => {
   for (let i = 0; i < title.length; i++) {
     path += transliteration[title[i].toLowerCase()]
   }
-
   return path;
 }

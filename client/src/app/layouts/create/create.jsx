@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import { createArticle, getArticleById } from '../../store/articles';
 import { useModal } from '../../hooks/use-modal';
 import Logo from '../../components/ui/logo';
 import AvatarFrame from '../../components/ui/avatar-frame';
 import avatar from '../../../assets/images/avatar.png';
-import { getArticleById } from '../../../mock-data';
 
 const Create = () => {
+  const dispatch = useDispatch()
   const [data, setData] = useState([
     { _id: nanoid(), type: 'title', content: '' },
   ]);
   const [articleTags, setArticleTags] = useState();
   const navigate = useNavigate();
   const { articleId } = useParams();
-  const article = getArticleById(articleId);
+  const article = useSelector(getArticleById(articleId));
   const { toggleWindow } = useModal();
 
   const handleSelectChange = (tagIds) => {
@@ -39,9 +41,17 @@ const Create = () => {
 
   const isDisabled = Object.keys(data).length <= 1 && !data.title;
 
-  const submitData = () => {
-    console.log(data);
-    console.log(articleTags);
+  const handleSubmit = () => {
+    const article = {
+      title: data.find((item) => item.type === 'title').content,
+      author: '6214e4a95dea4e848ee4c6b7',
+      rate: 0,
+      tags: articleTags,
+      content: data.filter((item) => item.type !== 'title')
+    }
+    
+    dispatch(createArticle(article));
+
     setData({ _id: nanoid(), type: 'title', content: '' });
     localStorage.removeItem('preview');
     localStorage.removeItem('tags');
@@ -88,7 +98,7 @@ const Create = () => {
           <Logo />
           <div className="create__info">
             <button
-              onClick={submitData}
+              onClick={handleSubmit}
               className="create__button"
               disabled={isDisabled}
             >
