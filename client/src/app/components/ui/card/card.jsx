@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTagsByIds } from '../../../store/tags';
+import {
+  getUserById,
+  getUsersLoadingStatus,
+  loadUsersList,
+} from '../../../store/users';
 import { displayDate, getPath } from '../../../utils';
 import { getTimeToRead } from '../../../utils';
-import { getTagById } from '../../../../mock-data';
-import { users } from '../../../../mock-data';
 import Badge from '../badge/badge';
 
 const Card = ({
@@ -11,29 +16,43 @@ const Card = ({
   author,
   title,
   content,
-  create_at,
+  createdAt,
   tags,
   addFavorite,
   favorites,
 }) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const snippet = content.find((element) => element.type === 'snippet').content;
   const thumbnail = content.find((element) => element.type === 'image').content;
-  const writer = users.find((user) => user._id === author);
   const isFavorite = favorites.includes(_id);
+  const articleTags = useSelector(getTagsByIds(tags));
+  const writer = useSelector(getUserById(author));
+  const isUserLoading = useSelector(getUsersLoadingStatus());
   const path = getPath(title);
+
+  useEffect(() => {
+    dispatch(loadUsersList());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (isUserLoading) return <div>Loading...</div>;
+
   return (
     <div className="card" id={_id}>
       <div className="card__header">
         <img src={writer.image} alt="author" className="card__header-avatar" />
         <div className="card__header-wrapper">
           <div className="card__header-author">{writer.name}</div>
-          <div className="card__header-date">{displayDate(create_at)}</div>
+          <div className="card__header-date">{displayDate(createdAt)}</div>
         </div>
       </div>
       <div className="card__wrapper">
         <div className="card__container">
-          <Link to={`/article/${path}`} state={{ pathname: location.pathname, articleId: _id }}>
+          <Link
+            to={`/article/${path}`}
+            state={{ pathname: location.pathname, articleId: _id }}
+          >
             <div className="card__content">
               <h4 className="card__title">{title}</h4>
               <div className="card__snippet">{snippet}</div>
@@ -41,8 +60,8 @@ const Card = ({
           </Link>
           <div className="card__footer">
             <span className="card__badges">
-              {tags.map((tag, index) => (
-                <Badge key={tag} tag={getTagById(tag)} />
+              {articleTags.map((tag) => (
+                <Badge key={tag._id} tag={tag} />
               ))}
             </span>
             <span className="card__info">
@@ -57,7 +76,7 @@ const Card = ({
             </span>
           </div>
         </div>
-        <div className='card__image-container'>
+        <div className="card__image-container">
           <img src={thumbnail} alt="" className="card__image" />
         </div>
       </div>

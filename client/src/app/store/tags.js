@@ -48,19 +48,7 @@ export const loadTagsList = () => async (dispatch, getState) => {
 export const getTags = () => (state) => state.tags.entities;
 export const getTagsLoadingStatus = () => (state) => state.tags.isLoading;
 export const getTagsByIds = (tagsIds) => (state) => {
-  const tagsArray = [];
-  if (state.tags.entities && tagsIds) {
-    for (const tagId of tagsIds) {
-      for (const tag of state.qualities.entities) {
-        if (tag._id === tagId) {
-          tagsArray.push(tag);
-          break;
-        }
-      }
-    }
-    return tagsArray;
-  }
-  return [];
+  return state.tags.entities.filter((tag) => tagsIds.includes(tag._id))
 };
 
 export default tagsReducer;

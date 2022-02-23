@@ -1,21 +1,28 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { getArticleById, getArticlesLoadingStatus } from '../../../store/articles';
 import Button from '../../ui/button/button';
 import { useModal } from '../../../hooks/use-modal';
 import CommentsModal from '../../common/comments/comments-modal/comments-modal';
 import ArticleContent from '../../ui/article-content/article-content';
 import { getTimeToRead } from '../../../utils';
-import { getArticleById, getUserById, getTagById } from '../../../../mock-data';
 import Badge from '../../ui/badge/badge';
+import { getUserById } from '../../../store/users';
+import { getTagsByIds } from '../../../store/tags';
 
 function Article({ addFavorite, favorites }) {
   const {
     state: { pathname, articleId },
   } = useLocation();
-  const article = getArticleById(articleId);
-  const { name, image } = getUserById(article.author);
+  const article = useSelector(getArticleById(articleId));
+  const isArticleLoading = useSelector(getArticlesLoadingStatus())
+  const { name, image } = useSelector(getUserById(article.author));
+  const tags = useSelector(getTagsByIds(article.tags))
   const { toggleWindow } = useModal();
   const isFavorite = favorites.includes(articleId);
+
+  if (isArticleLoading) return <h3>Loading...</h3>
 
   return (
     <>
@@ -40,8 +47,8 @@ function Article({ addFavorite, favorites }) {
         <div className="article__line"></div>
         <div className="article__footer">
           <ul className="article__tag-list">
-            {article.tags.map((tag) => (
-              <Badge key={tag} tag={getTagById(tag)} />
+            {tags.map((tag) => (
+              <Badge key={tag._id} tag={tag} />
             ))}
           </ul>
           <ul className="article__action-list">
