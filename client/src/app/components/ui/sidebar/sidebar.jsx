@@ -1,6 +1,5 @@
 import React from 'react';
-import Tag from '../tag/tag';
-import {tags} from '../../../../mock-data'
+import TagsList from '../tags-list/tags-list';
 
 const Sidebar = () => {
   return (
@@ -58,9 +57,7 @@ const Sidebar = () => {
           </div>
           <div className="sidebar__tags">
             <ul className="sidebar__tags-list">
-              {tags.map((tag) => (
-                <Tag key={tag._id} {...tag} />
-              ))}
+              <TagsList />
             </ul>
           </div>
         </div>

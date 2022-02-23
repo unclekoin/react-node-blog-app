@@ -20,7 +20,18 @@ router.patch('/:userId', auth, async (req, res) => {
   }
 });
 
-router.get('/', auth, async (req, res) => {
+// router.get('/', auth, async (req, res) => {
+//   try {
+//     const list = await User.find();
+//     res.status(200).send(list);
+//   } catch (e) {
+//     res.status(500).json({
+//       message: 'Server error. Please try again later.'
+//     });
+//   }
+// });
+
+router.get('/', async (req, res) => {
   try {
     const list = await User.find();
     res.status(200).send(list);

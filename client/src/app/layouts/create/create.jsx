@@ -17,8 +17,6 @@ const Create = () => {
   const article = getArticleById(articleId);
   const { toggleWindow } = useModal();
 
-  console.log(articleTags);
-
   const handleSelectChange = (tagIds) => {
     setArticleTags(tagIds);
   };

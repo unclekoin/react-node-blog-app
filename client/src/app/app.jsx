@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Main from './components/pages/main';
 import Article from './components/pages/article';
 import About from './components/pages/about';
@@ -85,6 +87,7 @@ const App = () => {
           </Route>
         </Routes>
       </ModalProvider>
+      <ToastContainer/>
     </>
   );
 };

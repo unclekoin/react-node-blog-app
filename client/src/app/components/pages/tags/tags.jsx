@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Tag from '../../ui/tag';
-import { tags } from '../../../../mock-data';
+import TagsList from '../../ui/tags-list';
 
 const Tags = () => {
   const navigate = useNavigate();
@@ -14,9 +13,7 @@ const Tags = () => {
       </div>
 
       <ul className="tags-page__list">
-        {tags.map((tag) => (
-          <Tag key={tag._id} name={tag.name} />
-        ))}
+        <TagsList />
       </ul>
     </div>
   );

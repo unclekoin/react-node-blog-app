@@ -7,7 +7,6 @@ import { articles } from '../../../../mock-data';
 const Main = ({ addFavorite, favorites }) => {
   const location = useLocation();
   const isFavoritesPage = location.pathname === '/favorites';
-  console.log(location);
 
   const data = isFavoritesPage
     ? articles.filter((article) => favorites.includes(article._id))

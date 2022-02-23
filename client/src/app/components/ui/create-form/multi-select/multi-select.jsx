@@ -6,8 +6,6 @@ const MultiSelect = ({ name, options, onChange, optionsDefault = [] }) => {
   optionsDefault.includes(option.value)
   );
 
-  console.log(defaultValue);
-
   const handleChange = (value) => {
     onChange(value.map((item) => item.value));
   };
