@@ -73,7 +73,7 @@ export const loadArticlesList = () => async (dispatch, getState) => {
 export const createArticle = (payload) => async (dispatch) => {
   dispatch(articleCreateRequested());
   try {
-    const { content } = await articlesService.createComment(payload);
+    const { content } = await articlesService.createArticle(payload);
     dispatch(articleCreated(content));
   } catch (error) {
     dispatch(createArticleFailed(error.message));

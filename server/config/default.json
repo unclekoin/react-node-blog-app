@@ -1,0 +1,6 @@
+{
+  "port": 9000,
+  "mongoURI": "mongodb+srv://pavel:!789-1jkl-123-jkl@cluster0.jekyi.mongodb.net/app?retryWrites=true&w=majority",
+  "accessSecret": "secret key for access secret",
+  "refreshSecret": "secret key for refresh secret"
+}
