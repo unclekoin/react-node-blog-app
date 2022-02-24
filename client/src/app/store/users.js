@@ -128,7 +128,7 @@ export function updateUserData(payload) {
   return async function (dispatch) {
     dispatch(userUpdateRequested());
     try {
-      const { content } = await userService.update(payload);
+      const content = await userService.update(payload);
       dispatch(userDataUpdated(content));
       history.push(`/users/${content._id}`);
     } catch (error) {
