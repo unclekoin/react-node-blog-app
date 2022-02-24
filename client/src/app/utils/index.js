@@ -3,7 +3,9 @@ import getTimeToRead from './get-time-to-read';
 import checkConfig from './checkConfig';
 import getInputTypesList from './get-input-types-list';
 import displayDate from './display-date';
-import { getPath } from './transliteration';
+import getPath from './transliteration';
+import generateAuthError from './generate-auth-error';
+import history from './history';
 
 export {
   getLocalDate,
@@ -11,5 +13,7 @@ export {
   checkConfig,
   getInputTypesList,
   displayDate,
-  getPath
+  generateAuthError,
+  getPath,
+  history,
 };

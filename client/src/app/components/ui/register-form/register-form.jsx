@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { signUp } from '../../../store/users';
 import InputGroup from '../input-group/input-group';
 import Button from '../button';
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const goBack = () => navigate(-2);
 
@@ -18,7 +21,9 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (!isValid) return;
+    dispatch(signUp({ ...data, favorites: [] }));
+    console.log({ ...data, favorites: [] });
     reset();
   };
 
@@ -47,15 +52,21 @@ const RegisterForm = () => {
         register={register}
       />
       <InputGroup
+        id="image"
+        name="image"
+        placeholder="Добавьте ссылку на фото..."
+        register={register}
+      />
+      {/* <InputGroup
         type="file"
         id="file"
         name="file"
         cls="file"
         placeholder="Выбрать фото..."
         register={register}
-      />
+      /> */}
       <div className="register-form__button">
-        <Button onClick={goBack} iaDisabled={!isValid}>
+        <Button onClick={goBack} isDisabled={!isValid}>
           Отправить
         </Button>
       </div>

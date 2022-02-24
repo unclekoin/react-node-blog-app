@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 })
 .post(async (req, res) => {
   try {
-    const article = await Comment.create({
+    const article = await Article.create({
       ...req.body,
       // userId: req.user._id
     });

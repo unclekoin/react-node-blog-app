@@ -37,10 +37,12 @@ const transliteration = {
 
 
 
-export const getPath = (title) => {
+const getPath = (title) => {
   let path = '';
   for (let i = 0; i < title.length; i++) {
     path += transliteration[title[i].toLowerCase()]
   }
   return path;
 }
+
+export default getPath;
