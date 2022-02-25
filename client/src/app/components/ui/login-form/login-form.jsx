@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../../store/users';
 import InputGroup from '../input-group/input-group';
 import Button from '../button';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
   const {
@@ -18,6 +21,7 @@ const LoginForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    dispatch(login(data));
     reset();
   };
 

@@ -24,9 +24,9 @@ const NavbarLoginModal = ({ state, onClick }) => {
       <Link className="navbar__login-tags" to="/tags">
         Теги
       </Link>
-      <button onClick={onClick} className="navbar__login-out">
+      <Link onClick={onClick} to="/" className="navbar__login-out">
         Выйти из системы
-      </button>
+      </Link>
     </div>
   );
 };

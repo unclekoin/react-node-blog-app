@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   getArticleById,
   getArticlesLoadingStatus,
 } from '../../../store/articles';
 import { useModal } from '../../../hooks/use-modal';
 import { getTimeToRead } from '../../../utils';
-import { getUserById } from '../../../store/users';
+import { getUserById, getUsersLoadingStatus } from '../../../store/users';
 import { getTagsByIds, getTagsLoadingStatus } from '../../../store/tags';
 import CommentsModal from '../../common/comments/comments-modal/comments-modal';
 import ArticleContent from '../../ui/article-content/article-content';
@@ -15,33 +15,37 @@ import Button from '../../ui/button/button';
 import Badge from '../../ui/badge/badge';
 
 function Article({ addFavorite, favorites }) {
-  const {
-    state: { pathname, articleId },
-  } = useLocation();
+  const { articleId } = useParams();
   const article = useSelector(getArticleById(articleId));
   const isArticleLoading = useSelector(getArticlesLoadingStatus());
   const isLoadingTags = useSelector(getTagsLoadingStatus());
-  const { name, image } = useSelector(getUserById(article.author));
+  const isLoadingUsers = useSelector(getUsersLoadingStatus());
+  const writer = useSelector(getUserById(article.author));
   const tags = useSelector(getTagsByIds(article.tags));
   const { toggleWindow } = useModal();
   const isFavorite = favorites.includes(articleId);
 
-  if (isArticleLoading || isLoadingTags) return <h3>Loading...</h3>;
+  if (isArticleLoading || isLoadingTags || isLoadingUsers)
+    return <h3>Loading...</h3>;
 
   return (
     <>
       <CommentsModal />
       <div className="article">
         <div className="article__button">
-          <Link to={`${pathname}#${articleId}`}>
+          <Link to={`/#${articleId}`}>
             <Button>Назад</Button>
           </Link>
         </div>
         <div className="article__line"></div>
         <div className="article__author-block">
-          <img className="article__author-image" src={image} alt="author" />
+          <img
+            className="article__author-image"
+            src={writer.image}
+            alt="author"
+          />
           <div className="article__author-info">
-            <span className="article__author-name">{name}</span>
+            <span className="article__author-name">{writer.name}</span>
             <span className="article__author-datetime">
               10 февраля 2022 года &bull; {getTimeToRead(article.content)}
             </span>

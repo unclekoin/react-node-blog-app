@@ -2,10 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getTagsByIds } from '../../../store/tags';
-import {
-  getUserById,
-  getUsersLoadingStatus,
-} from '../../../store/users';
+import { getUserById, getUsersLoadingStatus } from '../../../store/users';
 import { displayDate, getPath } from '../../../utils';
 import { getTimeToRead } from '../../../utils';
 import Badge from '../badge/badge';
@@ -21,13 +18,16 @@ const Card = ({
   favorites,
 }) => {
   const location = useLocation();
-  const snippet = content.find((element) => element.type === 'snippet').content;
-  const thumbnail = content.find((element) => element.type === 'image').content;
+  const snippet = content.find(
+    (element) => element.type === 'snippet'
+  )?.content;
+  const thumbnail = content.find(
+    (element) => element.type === 'image'
+  )?.content;
   const isFavorite = favorites.includes(_id);
   const articleTags = useSelector(getTagsByIds(tags));
   const writer = useSelector(getUserById(author));
   const isUserLoading = useSelector(getUsersLoadingStatus());
-  const path = getPath(title);
 
   if (isUserLoading) return <div>Loading...</div>;
 
@@ -42,10 +42,7 @@ const Card = ({
       </div>
       <div className="card__wrapper">
         <div className="card__container">
-          <Link
-            to={`/article/${path}`}
-            state={{ pathname: location.pathname, articleId: _id }}
-          >
+          <Link to={`/article/${_id}`}>
             <div className="card__content">
               <h4 className="card__title">{title}</h4>
               <div className="card__snippet">{snippet}</div>

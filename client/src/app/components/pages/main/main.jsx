@@ -1,30 +1,31 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { loadUsersList } from '../../../store/users';
+import { getArticles, getArticlesLoadingStatus } from '../../../store/articles';
 import { getLocalDate } from '../../../utils';
 import CardList from '../../ui/card-list/card-list';
 
 const Main = ({ addFavorite, favorites }) => {
-  const dispatch = useDispatch();
   const location = useLocation();
+  const articles = useSelector(getArticles());
+  const isLoading = useSelector(getArticlesLoadingStatus());
   const isFavoritesPage = location.pathname === '/favorites';
-
-  useEffect(() => {
-    dispatch(loadUsersList());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className="main">
       <div className="main__header">
         {!isFavoritesPage ? `Сегодня ${getLocalDate()}` : 'Избранное'}
       </div>
-      <CardList
-        addFavorite={addFavorite}
-        favorites={favorites}
-        isFavoritesPage={isFavoritesPage}
-      />
+      {!isLoading ? (
+        <CardList
+          articles={articles}
+          addFavorite={addFavorite}
+          favorites={favorites}
+          isFavoritesPage={isFavoritesPage}
+        />
+      ) : (
+        <h3>Loading...</h3>
+      )}
     </div>
   );
 };

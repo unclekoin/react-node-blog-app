@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const chalk = require('chalk');
 const cors = require('cors');
-const initDB = require('./start/init-db');
+// const initDB = require('./start/init-db');
 const routes = require('./routes');
 
 const app = express();
@@ -28,9 +28,9 @@ if (process.env.NODE_ENV === 'production') {
 
 async function start() {
   try {
-    mongoose.connection.once('open', () => {
-      initDB();
-    });
+    // mongoose.connection.once('open', () => {
+    //   initDB();
+    // });
     await mongoose.connect(config.get('mongoURI'));
     console.log(chalk.green('MongoDB is connected...'));
     app.listen(PORT, () => {

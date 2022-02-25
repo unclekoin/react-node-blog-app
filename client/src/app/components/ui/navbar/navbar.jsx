@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Logo from '../logo/logo';
 import NavbarLoginModal from './navbar-login-modal/navbar-login-modal';
+import { logOut } from '../../../store/users';
 import avatar from '../../../../assets/images/avatar.png';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [isNavModalOpen, setNavModalOpen] = useState(false);
   const toggleNavbarModal = () => {
     setNavModalOpen((prevState) => !prevState);
   };
 
+  const handleLogOut = () => {
+    toggleNavbarModal();
+    dispatch(logOut());
+  }
+
   return (
     <div className="navbar">
-      <NavbarLoginModal state={isNavModalOpen} onClick={toggleNavbarModal} />
+      <NavbarLoginModal state={isNavModalOpen} onClick={handleLogOut} />
       <nav className="navbar__nav">
         <Logo />
         <ul className="navbar__list">

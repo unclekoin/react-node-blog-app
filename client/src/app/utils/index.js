@@ -5,7 +5,6 @@ import getInputTypesList from './get-input-types-list';
 import displayDate from './display-date';
 import getPath from './transliteration';
 import generateAuthError from './generate-auth-error';
-import history from './history';
 
 export {
   getLocalDate,
@@ -14,6 +13,5 @@ export {
   getInputTypesList,
   displayDate,
   generateAuthError,
-  getPath,
-  history,
+  getPath
 };

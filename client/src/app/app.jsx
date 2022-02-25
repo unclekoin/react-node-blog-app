@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { loadArticlesList } from './store/articles';
+import { loadUsersList } from './store/users';
 import Main from './components/pages/main';
 import Article from './components/pages/article';
 import About from './components/pages/about';
@@ -20,6 +23,7 @@ import ArticleContent from './components/ui/article-content/article-content';
 import Tags from './components/pages/tags/tags';
 
 const App = () => {
+  const dispatch = useDispatch();
   const [favorites, setFavorite] = useState([]);
 
   const addFavorite = (articleId) => {
@@ -31,9 +35,12 @@ const App = () => {
   };
 
   useEffect(() => {
+    dispatch(loadArticlesList());
+    dispatch(loadUsersList());
     if (localStorage.favorites) {
       setFavorite(JSON.parse(localStorage.getItem('favorites')));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -87,7 +94,7 @@ const App = () => {
           </Route>
         </Routes>
       </ModalProvider>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 };

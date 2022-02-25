@@ -6,14 +6,13 @@ import { Provider } from 'react-redux';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './index.scss';
 import App from './app/app';
-import { history } from './app/utils';
 
 const store = createStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter history={history}>
+      <BrowserRouter >
         <App />
       </BrowserRouter>
     </Provider>

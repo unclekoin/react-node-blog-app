@@ -13,16 +13,16 @@ module.exports = async () => {
 };
 
 module.exports = async () => {
-  const articles = await Article.find();
-  if (articles.length !== articleMock.length) {
-    await createInitialEntity(Article, articleMock);
+  const users = await User.find();
+  if (users.length !== userMock.length) {
+    await createInitialEntity(User, userMock);
   }
 };
 
 module.exports = async () => {
-  const users = await User.find();
-  if (users.length !== userMock.length) {
-    await createInitialEntity(User, userMock);
+  const articles = await Article.find();
+  if (articles.length !== articleMock.length) {
+    await createInitialEntity(Article, articleMock);
   }
 };
 
