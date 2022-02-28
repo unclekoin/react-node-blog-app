@@ -2,14 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { nanoid } from 'nanoid';
-import { createArticle, getArticleById } from '../../store/articles';
+import {
+  createArticle,
+  getArticleById,
+} from '../../store/articles';
 import { useModal } from '../../hooks/use-modal';
+import { getCurrentUserId, getUserById } from '../../store/users';
 import Logo from '../../components/ui/logo';
 import AvatarFrame from '../../components/ui/avatar-frame';
 import avatar from '../../../assets/images/avatar.png';
 
 const Create = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const currentUserId = useSelector(getCurrentUserId());
+  const currentUser = useSelector(getUserById(currentUserId));
   const [data, setData] = useState([
     { _id: nanoid(), type: 'title', content: '' },
   ]);
@@ -22,6 +28,7 @@ const Create = () => {
   const handleSelectChange = (tagIds) => {
     setArticleTags(tagIds);
   };
+
 
   useEffect(() => {
     if (articleId) {
@@ -44,12 +51,12 @@ const Create = () => {
   const handleSubmit = () => {
     const article = {
       title: data.find((item) => item.type === 'title').content,
-      author: '6214e4a95dea4e848ee4c6b7',
+      author: currentUserId,
       rate: 0,
       tags: articleTags,
-      content: data.filter((item) => item.type !== 'title')
-    }
-    
+      content: data.filter((item) => item.type !== 'title'),
+    };
+
     dispatch(createArticle(article));
 
     setData({ _id: nanoid(), type: 'title', content: '' });
@@ -108,8 +115,8 @@ const Create = () => {
               <AvatarFrame>
                 <img
                   className="create__header-image"
-                  src={avatar}
-                  alt="avatar"
+                  src={currentUser?.image || avatar}
+                  alt="user"
                 />
               </AvatarFrame>
             </button>

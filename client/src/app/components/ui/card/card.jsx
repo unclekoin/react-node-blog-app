@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getTagsByIds } from '../../../store/tags';
 import { getUserById, getUsersLoadingStatus } from '../../../store/users';
-import { displayDate, getPath } from '../../../utils';
+import { displayDate } from '../../../utils';
 import { getTimeToRead } from '../../../utils';
 import Badge from '../badge/badge';
+import image from '../../../../assets/images/card-photo.jpg';
 
 const Card = ({
   _id,
@@ -17,7 +18,6 @@ const Card = ({
   addFavorite,
   favorites,
 }) => {
-  const location = useLocation();
   const snippet = content.find(
     (element) => element.type === 'snippet'
   )?.content;
@@ -66,9 +66,11 @@ const Card = ({
             </span>
           </div>
         </div>
-        <div className="card__image-container">
-          <img src={thumbnail} alt="" className="card__image" />
-        </div>
+        <Link to={`/article/${_id}`}>
+          <div className="card__image-container">
+            <img src={thumbnail || image} alt="" className="card__image" />
+          </div>
+        </Link>
       </div>
     </div>
   );

@@ -4,17 +4,14 @@ import { useOutletContext } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { useModal } from '../../../hooks/use-modal';
 import { getTags, getTagsByIds } from '../../../store/tags';
+import { getArticles } from '../../../store/articles';
 import MultiSelect from './multi-select/multi-select';
 import TypesMenu from './types-menu/types-menu';
 import CreateFormInputGroup from './create-form-input-group/create-form-input-group';
 import ResetModal from './reset-modal/reset-modal';
 
 const CreateForm = () => {
-  const tags = useSelector(getTags());
-  const inputRef = useRef(null);
-  const { toggleWindow } = useModal();
-  const [isTypeMenuOpen, setTypeMenuOpen] = useState(false);
-  const [
+    const [
     data,
     setData,
     articleTags,
@@ -24,16 +21,21 @@ const CreateForm = () => {
     removeElement,
     clearForm,
   ] = useOutletContext();
+  const tags = useSelector(getTags());
+  const tagsByIds = useSelector(getTagsByIds(articleTags))
+  const inputRef = useRef(null);
+  const { toggleWindow } = useModal();
+  const [isTypeMenuOpen, setTypeMenuOpen] = useState(false);
 
-  const defaultTags = useSelector(getTagsByIds(articleTags)).map((option) => ({
+  const defaultTags = tagsByIds.map((option) => ({
     label: option.name,
     value: option._id,
   }));
 
-  const selectOptions = tags.map((option) => ({
+  const selectOptions = tags ? tags.map((option) => ({
     label: option.name,
     value: option._id,
-  }));
+  })) : null;
 
   const focusHandler = () => {
     inputRef.current.focus();

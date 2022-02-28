@@ -1,13 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
   getArticleById,
   getArticlesLoadingStatus,
+  removeArticle,
 } from '../../../store/articles';
 import { useModal } from '../../../hooks/use-modal';
 import { getTimeToRead } from '../../../utils';
-import { getUserById, getUsersLoadingStatus } from '../../../store/users';
+import {
+  getUserById,
+  getUsersLoadingStatus,
+  getCurrentUserId,
+} from '../../../store/users';
 import { getTagsByIds, getTagsLoadingStatus } from '../../../store/tags';
 import CommentsModal from '../../common/comments/comments-modal/comments-modal';
 import ArticleContent from '../../ui/article-content/article-content';
@@ -15,7 +20,10 @@ import Button from '../../ui/button/button';
 import Badge from '../../ui/badge/badge';
 
 function Article({ addFavorite, favorites }) {
+  const dispatch = useDispatch();
   const { articleId } = useParams();
+  const navigate = useNavigate();
+  const currentUserId = useSelector(getCurrentUserId());
   const article = useSelector(getArticleById(articleId));
   const isArticleLoading = useSelector(getArticlesLoadingStatus());
   const isLoadingTags = useSelector(getTagsLoadingStatus());
@@ -24,6 +32,11 @@ function Article({ addFavorite, favorites }) {
   const tags = useSelector(getTagsByIds(article.tags));
   const { toggleWindow } = useModal();
   const isFavorite = favorites.includes(articleId);
+
+  const handleDeleteArticle = () => {
+    dispatch(removeArticle(articleId));
+    navigate(-1);
+  };
 
   if (isArticleLoading || isLoadingTags || isLoadingUsers)
     return <h3>Loading...</h3>;
@@ -60,21 +73,29 @@ function Article({ addFavorite, favorites }) {
             ))}
           </ul>
           <ul className="article__action-list">
-            {/* Здесь должна быть логика показа кнопки только администратору */}
-            <li className="article__action-item article__action-item--edit">
-              <Link to={`/edit/${articleId}`}>
-                <i className="bi bi-pencil-square"></i>
-              </Link>
-            </li>
+            {currentUserId === article.author ? (
+              <>
+                <li className="article__action-item article__action-item--edit">
+                  <Link to={`/edit/${articleId}`}>
+                    <i className="bi bi-pencil-square" />
+                  </Link>
+                </li>
+                <li className="article__action-item article__action-item--edit">
+                  <button onClick={handleDeleteArticle}>
+                    <i className="bi bi-trash3" />
+                  </button>
+                </li>
+              </>
+            ) : null}
             <li className="article__action-item">
               <button onClick={toggleWindow}>
-                <i className="bi bi-chat"></i>
+                <i className="bi bi-chat" />
               </button>
               <span>5</span>
             </li>
             <li className="article__action-item">
               <button>
-                <i className="bi bi-hand-thumbs-up"></i>
+                <i className="bi bi-hand-thumbs-up" />
               </button>
               <span>{article.rate}</span>
             </li>

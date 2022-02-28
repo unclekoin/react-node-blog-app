@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Logo from '../logo/logo';
 import NavbarLoginModal from './navbar-login-modal/navbar-login-modal';
-import { logOut } from '../../../store/users';
+import { getCurrentUserId, getUserById, logOut } from '../../../store/users';
 import avatar from '../../../../assets/images/avatar.png';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const currentUserId = useSelector(getCurrentUserId());
+  const currentUser = useSelector(getUserById(currentUserId));
   const [isNavModalOpen, setNavModalOpen] = useState(false);
   const toggleNavbarModal = () => {
     setNavModalOpen((prevState) => !prevState);
@@ -16,7 +18,7 @@ const Navbar = () => {
   const handleLogOut = () => {
     toggleNavbarModal();
     dispatch(logOut());
-  }
+  };
 
   return (
     <div className="navbar">
@@ -44,15 +46,21 @@ const Navbar = () => {
               <i className="bi bi-info-circle"></i>
             </NavLink>
           </li>
-          <li className="navbar__item">
-            <NavLink to="/create" className="navbar__link">
-              <i className="bi bi-pencil-square"></i>
-            </NavLink>
-          </li>
+          {currentUserId ? (
+            <li className="navbar__item">
+              <NavLink to="/create" className="navbar__link">
+                <i className="bi bi-pencil-square"></i>
+              </NavLink>
+            </li>
+          ) : null}
         </ul>
         <div className="navbar__login">
           <button onClick={toggleNavbarModal}>
-            <img className="navbar__login-image" src={avatar} alt="" />
+            <img
+              className="navbar__login-image"
+              src={currentUser?.image || avatar}
+              alt="user"
+            />
           </button>
         </div>
       </nav>

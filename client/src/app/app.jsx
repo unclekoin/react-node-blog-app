@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loadArticlesList } from './store/articles';
 import { loadUsersList } from './store/users';
+import { loadTagsList } from './store/tags';
 import Main from './components/pages/main';
 import Article from './components/pages/article';
 import About from './components/pages/about';
@@ -35,6 +36,7 @@ const App = () => {
   };
 
   useEffect(() => {
+    dispatch(loadTagsList());
     dispatch(loadArticlesList());
     dispatch(loadUsersList());
     if (localStorage.favorites) {
@@ -77,15 +79,12 @@ const App = () => {
             <Route index element={<LoginForm />} />
             <Route path="register" element={<RegisterForm />} />
           </Route>
-
           <Route path="create/" element={<Create />}>
             <Route index element={<CreateForm />} />
           </Route>
-
           <Route path="edit/:articleId" element={<Create />}>
             <Route index element={<CreateForm />} />
           </Route>
-
           <Route path="preview/" element={<Preview />}>
             <Route index element={<ArticleContent />} />
           </Route>

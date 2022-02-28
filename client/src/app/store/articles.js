@@ -83,7 +83,7 @@ export const createArticle = (payload) => async (dispatch) => {
 export const removeArticle = (articleId) => async (dispatch) => {
   dispatch(articleRemoveRequested());
   try {
-    const content = await articlesService.removeComment(articleId);
+    const content = await articlesService.removeArticle(articleId);
     if (!content) dispatch(articleRemoved(articleId));
   } catch (error) {
     dispatch(removeArticleFailed(error.message));
