@@ -11,6 +11,13 @@ const articlesService = {
     const { data } = await httpService.get(articlesEndpoint);
     return data;
   },
+  updateArticle: async (payload, articleId) => {
+    const { data } = await httpService.patch(
+      articlesEndpoint + articleId,
+      payload
+    );
+    return data;
+  },
   removeArticle: async (articleId) => {
     const { data } = await httpService.delete(articlesEndpoint + articleId);
     return data;

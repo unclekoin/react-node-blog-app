@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid';
 import {
   createArticle,
   getArticleById,
+  updateArticleData,
 } from '../../store/articles';
 import { useModal } from '../../hooks/use-modal';
 import { getCurrentUserId, getUserById } from '../../store/users';
@@ -28,7 +29,6 @@ const Create = () => {
   const handleSelectChange = (tagIds) => {
     setArticleTags(tagIds);
   };
-
 
   useEffect(() => {
     if (articleId) {
@@ -57,7 +57,11 @@ const Create = () => {
       content: data.filter((item) => item.type !== 'title'),
     };
 
-    dispatch(createArticle(article));
+    if (articleId) {
+      dispatch(updateArticleData(article, articleId));
+    } else {
+      dispatch(createArticle(article));
+    }
 
     setData({ _id: nanoid(), type: 'title', content: '' });
     localStorage.removeItem('preview');

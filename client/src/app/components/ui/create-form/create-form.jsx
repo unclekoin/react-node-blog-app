@@ -4,7 +4,6 @@ import { useOutletContext } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { useModal } from '../../../hooks/use-modal';
 import { getTags, getTagsByIds } from '../../../store/tags';
-import { getArticles } from '../../../store/articles';
 import MultiSelect from './multi-select/multi-select';
 import TypesMenu from './types-menu/types-menu';
 import CreateFormInputGroup from './create-form-input-group/create-form-input-group';

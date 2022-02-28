@@ -22,6 +22,7 @@ import CreateForm from './components/ui/create-form/create-form';
 import Preview from './layouts/preview/preview';
 import ArticleContent from './components/ui/article-content/article-content';
 import Tags from './components/pages/tags/tags';
+import TagIdProvider from './hoc/tag-id-provider';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const App = () => {
     if (localStorage.favorites) {
       setFavorite(JSON.parse(localStorage.getItem('favorites')));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -52,46 +53,52 @@ const App = () => {
   return (
     <>
       <ModalProvider>
-        <Overlay />
-        <Routes>
-          <Route path="/" element={<Wrapper />}>
-            <Route
-              index
-              element={<Main addFavorite={addFavorite} favorites={favorites} />}
-            />
-            <Route
-              path="article/:articleId"
-              element={
-                <Article addFavorite={addFavorite} favorites={favorites} />
-              }
-            />
-            <Route
-              path="favorites"
-              element={<Main addFavorite={addFavorite} favorites={favorites} />}
-            />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-          <Route>
-            <Route path="/about" element={<About />} />
-            <Route path="/contacts" element={<Contacts />} />
-          </Route>
-          <Route path="login/" element={<Login />}>
-            <Route index element={<LoginForm />} />
-            <Route path="register" element={<RegisterForm />} />
-          </Route>
-          <Route path="create/" element={<Create />}>
-            <Route index element={<CreateForm />} />
-          </Route>
-          <Route path="edit/:articleId" element={<Create />}>
-            <Route index element={<CreateForm />} />
-          </Route>
-          <Route path="preview/" element={<Preview />}>
-            <Route index element={<ArticleContent />} />
-          </Route>
-          <Route path="tags/">
-            <Route index element={<Tags />} />
-          </Route>
-        </Routes>
+        <TagIdProvider>
+          <Overlay />
+          <Routes>
+            <Route path="/" element={<Wrapper />}>
+              <Route
+                index
+                element={
+                  <Main addFavorite={addFavorite} favorites={favorites} />
+                }
+              />
+              <Route
+                path="article/:articleId"
+                element={
+                  <Article addFavorite={addFavorite} favorites={favorites} />
+                }
+              />
+              <Route
+                path="favorites"
+                element={
+                  <Main addFavorite={addFavorite} favorites={favorites} />
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+            <Route>
+              <Route path="/about" element={<About />} />
+              <Route path="/contacts" element={<Contacts />} />
+            </Route>
+            <Route path="login/" element={<Login />}>
+              <Route index element={<LoginForm />} />
+              <Route path="register" element={<RegisterForm />} />
+            </Route>
+            <Route path="create/" element={<Create />}>
+              <Route index element={<CreateForm />} />
+            </Route>
+            <Route path="edit/:articleId" element={<Create />}>
+              <Route index element={<CreateForm />} />
+            </Route>
+            <Route path="preview/" element={<Preview />}>
+              <Route index element={<ArticleContent />} />
+            </Route>
+            <Route path="tags/">
+              <Route index element={<Tags />} />
+            </Route>
+          </Routes>
+        </TagIdProvider>
       </ModalProvider>
       <ToastContainer />
     </>

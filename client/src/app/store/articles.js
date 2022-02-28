@@ -25,9 +25,18 @@ const articlesSlice = createSlice({
     articleCreated(state, action) {
       state.entities.push(action.payload);
     },
+    articleDataUpdated(state, action) {
+      const userIndex = state.entities.findIndex(
+        (article) => article._id === action.payload._id
+      );
+      state.entities[userIndex] = action.payload;
+    },
+    updateArticleFailed(state, action) {
+      state.error = action.payload;
+    },
     articleRemoved(state, action) {
       state.entities = state.entities.filter(
-        (comment) => comment._id !== action.payload
+        (article) => article._id !== action.payload
       );
     },
     createArticleFailed(state, action) {
@@ -39,8 +48,8 @@ const articlesSlice = createSlice({
   },
 });
 
-const articleCreateRequested = createAction("article/articleCreateRequested");
-const articleRemoveRequested = createAction("article/articleRemoveRequested");
+const articleCreateRequested = createAction('article/articleCreateRequested');
+const articleRemoveRequested = createAction('article/articleRemoveRequested');
 
 const { reducer: articlesReducer, actions } = articlesSlice;
 const {
@@ -50,8 +59,12 @@ const {
   articleCreated,
   articleRemoved,
   createArticleFailed,
+  articleDataUpdated,
+  updateArticleFailed,
   removeArticleFailed,
 } = actions;
+
+const articleUpdateRequested = createAction('articles/articleUpdateRequested');
 
 const isOutdated = (date) => {
   return Date.now() - date > 10 * 60 * 1000;
@@ -79,6 +92,21 @@ export const createArticle = (payload) => async (dispatch) => {
     dispatch(createArticleFailed(error.message));
   }
 };
+
+export function updateArticleData(payload, articleId) {
+  return async function (dispatch) {
+    dispatch(articleUpdateRequested());
+    try {
+      const { content } = await articlesService.updateArticle(
+        payload,
+        articleId
+      );
+      dispatch(articleDataUpdated(content));
+    } catch (error) {
+      dispatch(updateArticleFailed(error.message));
+    }
+  };
+}
 
 export const removeArticle = (articleId) => async (dispatch) => {
   dispatch(articleRemoveRequested());

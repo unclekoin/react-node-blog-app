@@ -16,4 +16,12 @@
   &:not(:last-child) {
     margin-right: 0.5rem;
   }
+
+  &.all {
+    background-color: $first-color-second;
+
+    &:hover {
+      background-color: $first-color;
+    }
+  }
 }

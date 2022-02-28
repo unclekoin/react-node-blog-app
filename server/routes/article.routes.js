@@ -40,17 +40,19 @@ router
     }
   });
 
-  router.patch('/:articleId', async (req, res) => {
-    try {
-      const { articleId } = req.params;
-        const updatedArticle = await User.findByIdAndUpdate(articleId, req.body, { new: true });
-        res.send(updatedArticle);
-    } catch (e) {
-      res.status(500).json({
-        message: 'Server error. Please try again later.'
-      });
-    }
-  });
+router.patch('/:articleId', async (req, res) => {
+  try {
+    const { articleId } = req.params;
+    const updatedArticle = await Article.findByIdAndUpdate(articleId, req.body, {
+      new: true,
+    });
+    res.send(updatedArticle);
+  } catch (e) {
+    res.status(500).json({
+      message: 'Server error. Please try again later.',
+    });
+  }
+});
 
 router.delete('/:articleId', async (req, res) => {
   try {
