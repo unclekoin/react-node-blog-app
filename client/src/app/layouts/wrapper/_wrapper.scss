@@ -12,4 +12,10 @@
   @include respond(phone) {
     grid-template-columns: 0.5fr 5fr;
   }
+
+  &__border {
+    width: 1px;
+    height: 100%;
+    background-color: $line-color;
+  }
 }

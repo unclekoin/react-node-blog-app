@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTagId } from '../../../hooks/use-tag-id';
+import { useSearch } from '../../../hooks/use-search';
 import Card from '../card';
 
 const CardList = ({ articles, addFavorite, favorites, isFavoritesPage }) => {
+  const { query } = useSearch();
   const { currentTagId } = useTagId();
   const data = isFavoritesPage
     ? articles.filter((article) => favorites.includes(article._id))
@@ -14,7 +16,11 @@ const CardList = ({ articles, addFavorite, favorites, isFavoritesPage }) => {
 
   const filteredData = currentTagId
     ? [...dataSorted].filter((article) => article.tags.includes(currentTagId))
-    : dataSorted;
+    : dataSorted.filter(
+        (article) =>
+          article.title.toLowerCase().includes(query.toLowerCase()) ||
+          getContent(article).includes(query.toLowerCase())
+      );
 
   return (
     <>
@@ -28,6 +34,14 @@ const CardList = ({ articles, addFavorite, favorites, isFavoritesPage }) => {
       ))}
     </>
   );
+};
+
+const getContent = (article) => {
+  return article.content
+    .map((text) => text.content)
+    .flat()
+    .join(' ')
+    .toLowerCase();
 };
 
 export default CardList;

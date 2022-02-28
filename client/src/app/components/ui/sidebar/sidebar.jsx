@@ -1,23 +1,31 @@
 import React from 'react';
+import { useSearch } from '../../../hooks/use-search'
 import TagsList from '../tags-list/tags-list';
 
 const Sidebar = () => {
+  const { query, changeQuery } = useSearch();
+  const handleChange = (e) => {
+    changeQuery(e.target.value);
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__container">
         <div>
           <div className="sidebar__info">
-            <form className="sidebar__form">
+            <div className="sidebar__form">
               <input
+                onChange={handleChange}
                 className="sidebar__input"
                 type="text"
                 name="search"
+                value={query}
                 placeholder="Найти..."
               />
-              <button className="sidebar__search-btn">
+              <div className="sidebar__search-btn">
                 <i className="bi bi-search"></i>
-              </button>
-            </form>
+              </div>
+            </div>
 
             <div className="sidebar__social">
               <div className="sidebar__social-title">
