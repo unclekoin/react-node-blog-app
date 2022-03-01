@@ -24,6 +24,7 @@ import ArticleContent from './components/ui/article-content/article-content';
 import Tags from './components/pages/tags/tags';
 import TagIdProvider from './hoc/tag-id-provider';
 import SearchProvider from './hoc/search-provider';
+import AuthorProvider from './hoc/author-provider';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -56,50 +57,55 @@ const App = () => {
       <ModalProvider>
         <TagIdProvider>
           <SearchProvider>
-            <Overlay />
-            <Routes>
-              <Route path="/" element={<Wrapper />}>
-                <Route
-                  index
-                  element={
-                    <Main addFavorite={addFavorite} favorites={favorites} />
-                  }
-                />
-                <Route
-                  path="article/:articleId"
-                  element={
-                    <Article addFavorite={addFavorite} favorites={favorites} />
-                  }
-                />
-                <Route
-                  path="favorites"
-                  element={
-                    <Main addFavorite={addFavorite} favorites={favorites} />
-                  }
-                />
-                <Route path="*" element={<NotFound />} />
-              </Route>
-              <Route>
-                <Route path="/about" element={<About />} />
-                <Route path="/contacts" element={<Contacts />} />
-              </Route>
-              <Route path="login/" element={<Login />}>
-                <Route index element={<LoginForm />} />
-                <Route path="register" element={<RegisterForm />} />
-              </Route>
-              <Route path="create/" element={<Create />}>
-                <Route index element={<CreateForm />} />
-              </Route>
-              <Route path="edit/:articleId" element={<Create />}>
-                <Route index element={<CreateForm />} />
-              </Route>
-              <Route path="preview/" element={<Preview />}>
-                <Route index element={<ArticleContent />} />
-              </Route>
-              <Route path="tags/">
-                <Route index element={<Tags />} />
-              </Route>
-            </Routes>
+            <AuthorProvider>
+              <Overlay />
+              <Routes>
+                <Route path="/" element={<Wrapper />}>
+                  <Route
+                    index
+                    element={
+                      <Main addFavorite={addFavorite} favorites={favorites} />
+                    }
+                  />
+                  <Route
+                    path="article/:articleId"
+                    element={
+                      <Article
+                        addFavorite={addFavorite}
+                        favorites={favorites}
+                      />
+                    }
+                  />
+                  <Route
+                    path="favorites"
+                    element={
+                      <Main addFavorite={addFavorite} favorites={favorites} />
+                    }
+                  />
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+                <Route>
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contacts" element={<Contacts />} />
+                </Route>
+                <Route path="login/" element={<Login />}>
+                  <Route index element={<LoginForm />} />
+                  <Route path="register" element={<RegisterForm />} />
+                </Route>
+                <Route path="create/" element={<Create />}>
+                  <Route index element={<CreateForm />} />
+                </Route>
+                <Route path="edit/:articleId" element={<Create />}>
+                  <Route index element={<CreateForm />} />
+                </Route>
+                <Route path="preview/" element={<Preview />}>
+                  <Route index element={<ArticleContent />} />
+                </Route>
+                <Route path="tags/">
+                  <Route index element={<Tags />} />
+                </Route>
+              </Routes>
+            </AuthorProvider>
           </SearchProvider>
         </TagIdProvider>
       </ModalProvider>

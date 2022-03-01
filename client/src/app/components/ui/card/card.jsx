@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useAuthor } from '../../../hooks/use-author';
 import { getTagsByIds } from '../../../store/tags';
 import { getUserById, getUsersLoadingStatus } from '../../../store/users';
 import { displayDate } from '../../../utils';
@@ -18,6 +19,7 @@ const Card = ({
   addFavorite,
   favorites,
 }) => {
+  const { setAuthor } = useAuthor();
   const snippet = content.find(
     (element) => element.type === 'snippet'
   )?.content;
@@ -33,7 +35,11 @@ const Card = ({
 
   return (
     <div className="card" id={_id}>
-      <div className="card__header">
+      <div
+        onClick={() => setAuthor(author)}
+        className="card__header"
+        role="button"
+      >
         <img src={writer.image} alt="author" className="card__header-avatar" />
         <div className="card__header-wrapper">
           <div className="card__header-author">{writer.name}</div>

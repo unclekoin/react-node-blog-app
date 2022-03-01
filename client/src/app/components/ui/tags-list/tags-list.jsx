@@ -14,7 +14,7 @@ const TagsList = () => {
       {tags.map((tag) => (
         <Tag key={tag._id} {...tag} />
       ))}
-      <Tag id="reset" name="Сбросить фильтр" cls="reset" />
+      <Tag id="reset" name="Сбросить все" cls="reset" />
     </>
   );
 };
