@@ -4,4 +4,4 @@
 - Node.js
 - Express.js
 
-![Screenshot](./assets/img/screenshot.png)
+![Screenshot](./client/src//assets/images/screenshot.png)
