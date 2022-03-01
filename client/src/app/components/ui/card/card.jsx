@@ -8,6 +8,7 @@ import { displayDate } from '../../../utils';
 import { getTimeToRead } from '../../../utils';
 import Badge from '../badge/badge';
 import image from '../../../../assets/images/card-photo.jpg';
+import avatar from '../../../../assets/images/avatar.png'
 
 const Card = ({
   _id,
@@ -40,7 +41,7 @@ const Card = ({
         className="card__header"
         role="button"
       >
-        <img src={writer.image} alt="author" className="card__header-avatar" />
+        <img src={writer.image || avatar} alt="author" className="card__header-avatar" />
         <div className="card__header-wrapper">
           <div className="card__header-author">{writer.name}</div>
           <div className="card__header-date">{displayDate(createdAt)}</div>

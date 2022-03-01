@@ -26,10 +26,10 @@ const articlesSlice = createSlice({
       state.entities.push(action.payload);
     },
     articleDataUpdated(state, action) {
-      const userIndex = state.entities.findIndex(
+      const articleIndex = state.entities.findIndex(
         (article) => article._id === action.payload._id
       );
-      state.entities[userIndex] = action.payload;
+      state.entities[articleIndex] = action.payload;
     },
     updateArticleFailed(state, action) {
       state.error = action.payload;
@@ -97,7 +97,7 @@ export function updateArticleData(payload, articleId) {
   return async function (dispatch) {
     dispatch(articleUpdateRequested());
     try {
-      const { content } = await articlesService.updateArticle(
+      const content = await articlesService.updateArticle(
         payload,
         articleId
       );
